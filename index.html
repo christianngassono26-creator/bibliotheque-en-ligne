@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bibliothèque en ligne</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <h1>Ma bibliothèque en ligne</h1>
+
+    <form id="formulaire-livre">
+
+        <input
+            type="text"
+            id="titre"
+            placeholder="Titre du livre"
+            required
+        >
+
+        <input
+            type="text"
+            id="auteur"
+            placeholder="Auteur"
+            required
+        >
+
+        <input
+            type="text"
+            id="categorie"
+            placeholder="Catégorie"
+            required
+        >
+
+        <label for="image">Couverture du livre</label>
+
+<input
+    type="file"
+    id="image"
+    accept="image/*"
+>
+
+<img
+    id="aperçu-image"
+    src=""
+    alt="Aperçu de la couverture"
+>
+        <button type="submit" id="bouton-formulaire">
+    Ajouter le livre
+</button>
+
+<button
+    type="button"
+    id="bouton-annuler"
+    style="display: none;"
+>
+    Annuler la modification
+</button>
+    </form>
+<div id="message"></div>
+    <div class="recherche">
+
+        <input
+            type="text"
+            id="recherche"
+            placeholder="Rechercher un livre..."
+        >  
+      <div class="filtre-categorie">
+
+    <label for="filtre-categorie">
+        Filtrer par catégorie :
+    </label>
+
+    <select id="filtre-categorie">
+
+        <option value="">
+            Toutes les catégories
+        </option>
+
+    </select>
+
+</div>
+
+    </div>
+
+    <p id="nombre-livres">Nombre de livres : 0</p>
+
+    <div id="liste-livres"></div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
