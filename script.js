@@ -178,7 +178,7 @@ carte.innerHTML = `
     <p>Auteur : ${livre.auteur}</p>
     <p>Catégorie : ${livre.categorie}</p>
 
-    ${livre.titre === "Les Misérables" && livre.auteur === "Victor Hugo"
+   ${livre.titre.trim().toLowerCase() === "les misérables"
         ? '<a class="bouton-lire" href="lecteur.html">Lire le livre</a>'
         : ''}
 
