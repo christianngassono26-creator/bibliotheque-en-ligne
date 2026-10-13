@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lire Les Misérables</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.8;
+            color: #292929;
+            background: #f8f6f0;
+        }
+        h1, p { text-align: center; }
+        .bouton {
+            display: inline-block;
+            padding: 10px 16px;
+            margin: 5px;
+            background: #244a3b;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+        }
+        .commandes { text-align: center; margin: 25px 0; }
+        iframe {
+            width: 100%;
+            min-height: 70vh;
+            border: 1px solid #ddd;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Les Misérables</h1>
+    <p>Victor Hugo — Tome I : Fantine</p>
+
+    <div class="commandes">
+        <a class="bouton" href="index.html">Retour à la bibliothèque</a>
+        <a class="bouton"
+           href="https://fr.wikisource.org/wiki/Les_Mis%C3%A9rables/Tome_1"
+           target="_blank" rel="noopener noreferrer">
+            Ouvrir le livre sur Wikisource
+        </a>
+    </div>
+
+    <iframe
+        src="https://fr.wikisource.org/wiki/Les_Mis%C3%A9rables/Tome_1"
+        title="Lecture des Misérables sur Wikisource">
+    </iframe>
+
+    <p>Si le texte ne s'affiche pas ci-dessous, utilise le bouton pour ouvrir le livre sur Wikisource.</p>
+</body>
+</html>
