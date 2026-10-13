@@ -171,27 +171,21 @@ function afficherLivres( texteRecherche = "", categorieRecherche = "") {
         carte.classList.add("carte-livre");
 
 
-        carte.innerHTML = `
-    <img
-        src="${livre.image || "images/livre-sans-image.jpg"}"
-        alt="Couverture de ${livre.titre}"
-        class="couverture-livre"
-    >
-
+        
+carte.innerHTML = `
+    <img src="${livre.image || "images/livre-sans-image.jpg"}" alt="Couverture de ${livre.titre}" class="couverture-livre">
     <h2>${livre.titre}</h2>
-
     <p>Auteur : ${livre.auteur}</p>
-
     <p>Catégorie : ${livre.categorie}</p>
 
-    <button class="bouton-modifier">
-        Modifier
-    </button>
+    ${livre.titre === "Les Misérables" && livre.auteur === "Victor Hugo"
+        ? '<a class="bouton-lire" href="lecteur.html">Lire le livre</a>'
+        : ''}
 
-    <button class="bouton-supprimer">
-        Supprimer
-    </button>
+    <button class="bouton-modifier">Modifier</button>
+    <button class="bouton-supprimer">Supprimer</button>
 `;
+
 
 
         // ===============================
