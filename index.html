@@ -1,102 +1,184 @@
+
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Bibliothèque en ligne</title>
-
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12372a">
+  <title>Lecteur de livres | Ma bibliothèque</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f3ed;
+      color: #25352c;
+      line-height: 1.8;
+    }
+    header {
+      background: #12372a;
+      color: white;
+      padding: 22px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header h1 { margin: 0; font-size: 1.5rem; }
+    header a { color: #f2d28b; text-decoration: none; }
+    main {
+      max-width: 900px;
+      margin: 35px auto;
+      padding: 0 18px;
+    }
+    .panel {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 6px 25px #0000000c;
+    }
+    label { display: block; font-weight: bold; margin-bottom: 8px; }
+    select, button {
+      font: inherit;
+      padding: 12px 14px;
+      border-radius: 8px;
+    }
+    select {
+      width: 100%;
+      border: 1px solid #d5d9d4;
+      background: white;
+      margin-bottom: 14px;
+    }
+    button {
+      background: #176344;
+      color: white;
+      border: 0;
+      cursor: pointer;
+    }
+    button:hover { background: #104b32; }
+    #status { color: #59685e; margin: 18px 0; }
+    article {
+      margin-top: 25px;
+      padding: 28px;
+      background: #fffdf8;
+      border: 1px solid #e9e3d7;
+      border-radius: 12px;
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+      overflow-wrap: anywhere;
+    }
+    article h1, article h2, article h3 { line-height: 1.4; }
+    article p { margin: 0 0 1.2em; }
+    .source { margin-top: 20px; }
+    .source a { color: #176344; }
+    footer { text-align: center; padding: 25px; color: #68736b; }
+    @media (max-width: 600px) {
+      .panel, article { padding: 18px; }
+      header { padding: 18px; }
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <h1>📚 Ma bibliothèque</h1>
+    <a href="index.html">← Retour à la bibliothèque</a>
+  </header>
 
-    <h1>Ma bibliothèque en ligne</h1>
+  <main>
+    <section class="panel">
+      <h2>Lecteur de livres</h2>
+      <p>Choisis un ouvrage pour afficher son texte directement sur cette page.</p>
 
-    <form id="formulaire-livre">
+      <label for="bookSelect">Choisir un livre</label>
+      <select id="bookSelect">
+        <option value="Les_Mis%C3%A9rables/Tome_1">Les Misérables — Victor Hugo</option>
+        <option value="Le_Petit_Prince">Le Petit Prince — Antoine de Saint-Exupéry</option>
+        <option value="L%27Alchimiste">L’Alchimiste — Paulo Coelho</option>
+      </select>
 
-        <input
-            type="text"
-            id="titre"
-            placeholder="Titre du livre"
-            required
-        >
+      <button id="readButton" type="button">Lire le livre</button>
+      <p id="status" role="status">Choisis un livre, puis clique sur « Lire le livre ».</p>
+    </section>
 
-        <input
-            type="text"
-            id="auteur"
-            placeholder="Auteur"
-            required
-        >
+    <article id="bookText">
+      <p>Le texte du livre apparaîtra ici.</p>
+    </article>
 
-        <input
-            type="text"
-            id="categorie"
-            placeholder="Catégorie"
-            required
-        >
+    <p class="source" id="sourceLink"></p>
+  </main>
 
-        <label for="image">Couverture du livre</label>
+  <footer>Ma bibliothèque en ligne</footer>
 
-<input
-    type="file"
-    id="image"
-    accept="image/*"
->
+  <script>
+    const select = document.getElementById("bookSelect");
+    const button = document.getElementById("readButton");
+    const status = document.getElementById("status");
+    const bookText = document.getElementById("bookText");
+    const sourceLink = document.getElementById("sourceLink");
 
-<img
-    id="aperçu-image"
-    src=""
-    alt="Aperçu de la couverture"
->
-        <button type="submit" id="bouton-formulaire">
-    Ajouter le livre
-</button>
+    async function loadBook() {
+      const page = select.value;
+      const title = select.options[select.selectedIndex].text;
 
-<button
-    type="button"
-    id="bouton-annuler"
-    style="display: none;"
->
-    Annuler la modification
-</button>
-    </form>
-<div id="message"></div>
-    <div class="recherche">
+      status.textContent = "Chargement du livre…";
+      bookText.replaceChildren();
+      sourceLink.replaceChildren();
 
-        <input
-            type="text"
-            id="recherche"
-            placeholder="Rechercher un livre..."
-        >  
-      <div class="filtre-categorie">
+      const url = "https://fr.wikisource.org/w/api.php?action=parse&page="
+        + page
+        + "&prop=text&format=json&origin=*";
 
-    <label for="filtre-categorie">
-        Filtrer par catégorie :
-    </label>
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Erreur réseau");
 
-    <select id="filtre-categorie">
+        const data = await response.json();
+        const html = data.parse && data.parse.text && data.parse.text["*"];
 
-        <option value="">
-            Toutes les catégories
-        </option>
+        if (!html) throw new Error("Texte indisponible");
 
-    </select>
+        const documentLivre = new DOMParser().parseFromString(html, "text/html");
+        documentLivre.querySelectorAll(
+          "script,style,iframe,form,nav,.navbox,.mw-editsection,.reference"
+        ).forEach(element => element.remove());
 
-</div>
+        const contenu = documentLivre.querySelector(".mw-parser-output")
+          || documentLivre.body;
 
-    </div>
+        const elements = contenu.querySelectorAll("h2,h3,h4,p,blockquote,ol,ul");
 
-    <p id="nombre-livres">Nombre de livres : 0</p>
+        if (!elements.length) throw new Error("Aucun texte trouvé");
 
-    <div id="liste-livres"></div>
+        elements.forEach(element => {
+          const clone = document.createElement(element.tagName.toLowerCase());
+          clone.textContent = element.textContent.trim();
+          if (clone.textContent) bookText.appendChild(clone);
+        });
 
-    <script src="script.js"></script>
+        if (!bookText.textContent.trim()) throw new Error("Texte vide");
 
+        status.textContent = "Lecture : " + title;
+        const link = document.createElement("a");
+        link.href = "https://fr.wikisource.org/wiki/" + page;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Consulter également la source sur Wikisource";
+        sourceLink.appendChild(link);
+      } catch (error) {
+        status.textContent =
+          "Impossible de charger ce texte pour le moment. Vérifie ta connexion ou essaie la source ci-dessous.";
+
+        const link = document.createElement("a");
+        link.href = "https://fr.wikisource.org/wiki/" + page;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Ouvrir " + title + " sur Wikisource";
+        sourceLink.appendChild(link);
+      }
+    }
+
+    button.addEventListener("click", loadBook);
+  </script>
 </body>
-
 </html>
