@@ -5,8 +5,163 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Découvrir un livre | Bibliothèque en ligne</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-/* ===== AMBIANCE LUMINEUSE ANIMÉE ===== */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f5f9;
+      color: #263238;
+      line-height: 1.7;
+    }
+
+    header {
+      background: #17365d;
+      color: white;
+      padding: 25px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin-bottom: 0;
+    }
+
+    nav {
+      background: #102744;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      width: 92%;
+      max-width: 950px;
+      margin: 30px auto;
+    }
+
+    .selection,
+    .carte {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 16px;
+      background: white;
+      margin-bottom: 15px;
+    }
+
+    button,
+    .bouton {
+      display: inline-block;
+      background: #1769aa;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    button:hover,
+    .bouton:hover {
+      background: #104b7c;
+    }
+
+    .carte h2 {
+      color: #17365d;
+      border-bottom: 2px solid #e5edf5;
+      padding-bottom: 8px;
+    }
+
+    .carte h3 {
+      color: #1769aa;
+      margin-top: 25px;
+    }
+
+    .infos {
+      background: #edf5fc;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 18px 0;
+    }
+
+    .infos p {
+      margin: 5px 0;
+    }
+
+    #resume,
+    #biographie,
+    #personnages,
+    #lecons {
+      white-space: pre-line;
+    }
+
+    .retour {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #1769aa;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #102744;
+      color: white;
+      text-align: center;
+      padding: 18px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 23px;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 5px 8px;
+      }
+
+      .selection,
+      .carte {
+        padding: 18px;
+      }
+    }
+    /* ===== AMBIANCE LUMINEUSE ANIMÉE ===== */
 
 body {
   position: relative;
@@ -197,163 +352,6 @@ footer {
     scroll-behavior: auto !important;
   }
 }
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f3f5f9;
-      color: #263238;
-      line-height: 1.7;
-    }
-
-    header {
-      background: #17365d;
-      color: white;
-      padding: 25px 15px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    header p {
-      margin-bottom: 0;
-    }
-
-    nav {
-      background: #102744;
-      padding: 12px;
-      text-align: center;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 12px;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    main {
-      width: 92%;
-      max-width: 950px;
-      margin: 30px auto;
-    }
-
-    .selection,
-    .carte {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-      margin-bottom: 25px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    select {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #cbd5e1;
-      border-radius: 7px;
-      font-size: 16px;
-      background: white;
-      margin-bottom: 15px;
-    }
-
-    button,
-    .bouton {
-      display: inline-block;
-      background: #1769aa;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 7px;
-      font-size: 15px;
-      font-weight: bold;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    button:hover,
-    .bouton:hover {
-      background: #104b7c;
-    }
-
-    .carte h2 {
-      color: #17365d;
-      border-bottom: 2px solid #e5edf5;
-      padding-bottom: 8px;
-    }
-
-    .carte h3 {
-      color: #1769aa;
-      margin-top: 25px;
-    }
-
-    .infos {
-      background: #edf5fc;
-      padding: 15px;
-      border-radius: 8px;
-      margin: 18px 0;
-    }
-
-    .infos p {
-      margin: 5px 0;
-    }
-
-    #resume,
-    #biographie,
-    #personnages,
-    #lecons {
-      white-space: pre-line;
-    }
-
-    .retour {
-      display: inline-block;
-      margin-bottom: 20px;
-      color: #1769aa;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    footer {
-      background: #102744;
-      color: white;
-      text-align: center;
-      padding: 18px;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 23px;
-      }
-
-      nav a {
-        display: inline-block;
-        margin: 5px 8px;
-      }
-
-      .selection,
-      .carte {
-        padding: 18px;
-      }
-    }
   </style>
 </head>
 
