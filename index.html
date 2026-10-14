@@ -4,583 +4,540 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Découvrir un livre | Bibliothèque en ligne</title>
+  <meta name="theme-color" content="#071426">
+
+  <title>Accueil | Bibliothèque en ligne</title>
+
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f3f5f9;
-      color: #263238;
+      color: #edf5ff;
+      background: linear-gradient(
+        135deg,
+        #071426,
+        #102744,
+        #201447,
+        #071426
+      );
+      background-size: 300% 300%;
+      animation: fondLumineux 15s ease infinite;
       line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    @keyframes fondLumineux {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     header {
-      background: #17365d;
-      color: white;
-      padding: 25px 15px;
-      text-align: center;
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      background: rgba(3, 13, 30, 0.85);
+      border-bottom: 1px solid rgba(125, 211, 252, 0.4);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
+      position: relative;
+      z-index: 2;
     }
 
     header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    header p {
-      margin-bottom: 0;
+      font-size: 1.6rem;
+      color: white;
+      text-shadow:
+        0 0 8px #7dd3fc,
+        0 0 22px #398bff;
     }
 
     nav {
-      background: #102744;
-      padding: 12px;
-      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
     }
 
     nav a {
-      color: white;
+      color: #dbeafe;
       text-decoration: none;
-      margin: 0 12px;
       font-weight: bold;
+      transition: color 0.3s, text-shadow 0.3s;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      color: #67e8f9;
+      text-shadow: 0 0 12px #38bdf8;
     }
 
-    main {
-      width: 92%;
-      max-width: 950px;
-      margin: 30px auto;
+    .hero {
+      text-align: center;
+      padding: 85px 20px 70px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .selection,
-    .carte {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-      margin-bottom: 25px;
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      filter: blur(75px);
+      opacity: 0.35;
+      pointer-events: none;
+      animation: halo 7s ease-in-out infinite alternate;
     }
 
-    label {
-      display: block;
-      margin-bottom: 10px;
+    .hero::before {
+      background: #168bff;
+      top: 20px;
+      left: 5%;
+    }
+
+    .hero::after {
+      background: #8b5cf6;
+      right: 5%;
+      bottom: 0;
+      animation-delay: 2s;
+    }
+
+    @keyframes halo {
+      from { transform: translate(0, 0) scale(0.9); }
+      to { transform: translate(25px, -15px) scale(1.2); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .hero h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      text-shadow:
+        0 0 12px rgba(56, 189, 248, 0.7),
+        0 0 30px rgba(139, 92, 246, 0.4);
+      animation: apparition 1s ease both;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #d1e4ff;
+      margin-bottom: 28px;
+      animation: apparition 1.3s ease both;
+    }
+
+    @keyframes apparition {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bouton {
+      display: inline-block;
+      padding: 12px 23px;
+      border-radius: 8px;
+      color: white;
+      background: linear-gradient(110deg, #0878d1, #6d3ce8);
+      background-size: 200% 200%;
+      text-decoration: none;
       font-weight: bold;
+      border: 1px solid rgba(147, 197, 253, 0.4);
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.3);
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-position 0.4s ease;
     }
 
-    select {
+    .bouton:hover {
+      transform: translateY(-3px);
+      background-position: 100% 50%;
+      box-shadow:
+        0 0 12px #38bdf8,
+        0 0 28px rgba(59, 130, 246, 0.6);
+    }
+
+    .bibliotheque {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px 25px 75px;
+    }
+
+    .section-titre {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-titre h2 {
+      font-size: 2rem;
+      color: #93c5fd;
+      text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+      margin-bottom: 8px;
+    }
+
+    .section-titre p {
+      color: #c8d9ef;
+    }
+
+    .recherche {
+      display: block;
       width: 100%;
-      padding: 13px;
-      border: 1px solid #cbd5e1;
-      border-radius: 7px;
-      font-size: 16px;
-      background: white;
+      max-width: 550px;
+      margin: 0 auto 35px;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(125, 211, 252, 0.4);
+      background: rgba(12, 29, 55, 0.9);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .recherche::placeholder {
+      color: #b4c6dc;
+    }
+
+    .recherche:focus {
+      border-color: #67e8f9;
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.35);
+    }
+
+    .grille {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 25px;
+    }
+
+    .livre {
+      position: relative;
+      overflow: hidden;
+      padding: 27px 23px;
+      border-radius: 16px;
+      background: rgba(12, 29, 55, 0.85);
+      border: 1px solid rgba(125, 211, 252, 0.3);
+      box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.25),
+        0 0 18px rgba(59, 130, 246, 0.1);
+      backdrop-filter: blur(12px);
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+      animation: apparition 0.8s ease both;
+    }
+
+    .livre:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .livre:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .livre::before {
+      content: "";
+      position: absolute;
+      top: -70px;
+      right: -70px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #168bff;
+      filter: blur(55px);
+      opacity: 0.2;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .livre:hover {
+      transform: translateY(-8px);
+      border-color: rgba(103, 232, 249, 0.85);
+      box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.35),
+        0 0 22px rgba(56, 189, 248, 0.3),
+        0 0 45px rgba(139, 92, 246, 0.2);
+    }
+
+    .livre:hover::before {
+      opacity: 0.6;
+    }
+
+    .livre .icone {
+      font-size: 3rem;
+      margin-bottom: 14px;
+      display: inline-block;
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
+      transition: transform 0.3s;
+    }
+
+    .livre:hover .icone {
+      transform: translateY(-5px) rotate(-4deg);
+    }
+
+    .livre h3 {
+      position: relative;
+      color: #93c5fd;
+      font-size: 1.35rem;
+      margin-bottom: 7px;
+    }
+
+    .livre .auteur {
+      color: #67e8f9;
+      font-weight: bold;
       margin-bottom: 15px;
     }
 
-    button,
-    .bouton {
-      display: inline-block;
-      background: #1769aa;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 7px;
-      font-size: 15px;
-      font-weight: bold;
-      text-decoration: none;
-      cursor: pointer;
+    .livre p {
+      position: relative;
+      color: #d2deee;
+      margin-bottom: 22px;
     }
 
-    button:hover,
-    .bouton:hover {
-      background: #104b7c;
+    .livre .bouton {
+      position: relative;
     }
 
-    .carte h2 {
-      color: #17365d;
-      border-bottom: 2px solid #e5edf5;
-      padding-bottom: 8px;
+    .aucun-resultat {
+      display: none;
+      text-align: center;
+      color: #d2deee;
+      margin: 30px 0;
     }
 
-    .carte h3 {
-      color: #1769aa;
-      margin-top: 25px;
+    .presentation {
+      max-width: 900px;
+      margin: 0 auto 65px;
+      padding: 30px;
+      text-align: center;
+      border: 1px solid rgba(125, 211, 252, 0.25);
+      border-radius: 15px;
+      background: rgba(12, 29, 55, 0.7);
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.1);
     }
 
-    .infos {
-      background: #edf5fc;
-      padding: 15px;
-      border-radius: 8px;
-      margin: 18px 0;
+    .presentation h2 {
+      color: #93c5fd;
+      margin-bottom: 12px;
     }
 
-    .infos p {
-      margin: 5px 0;
-    }
-
-    #resume,
-    #biographie,
-    #personnages,
-    #lecons {
-      white-space: pre-line;
-    }
-
-    .retour {
-      display: inline-block;
+    .presentation p {
+      color: #d2deee;
       margin-bottom: 20px;
-      color: #1769aa;
-      font-weight: bold;
-      text-decoration: none;
     }
 
     footer {
-      background: #102744;
-      color: white;
       text-align: center;
-      padding: 18px;
-      margin-top: 40px;
+      padding: 25px 15px;
+      color: #c2d5ec;
+      background: rgba(3, 13, 30, 0.9);
+      border-top: 1px solid rgba(125, 211, 252, 0.3);
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 23px;
+    @media (max-width: 850px) {
+      .grille {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+    }
 
-      nav a {
-        display: inline-block;
-        margin: 5px 8px;
-      }
-
-      .selection,
-      .carte {
+    @media (max-width: 580px) {
+      header {
         padding: 18px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 1.35rem;
+      }
+
+      .hero {
+        padding: 60px 18px;
+      }
+
+      .bibliotheque {
+        padding: 15px 16px 45px;
+      }
+
+      .grille {
+        grid-template-columns: 1fr;
+      }
+
+      .livre {
+        padding: 23px;
+      }
+
+      .presentation {
+        margin: 0 16px 45px;
+        padding: 23px;
       }
     }
-    /* ===== AMBIANCE LUMINEUSE ANIMÉE ===== */
 
-body {
-  position: relative;
-  overflow-x: hidden;
-  background: linear-gradient(
-    135deg,
-    #071426,
-    #102744,
-    #201447,
-    #071426
-  );
-  background-size: 300% 300%;
-  animation: fondLumineux 14s ease infinite;
-  color: #f3f7ff;
-}
-
-@keyframes fondLumineux {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* En-tête lumineux */
-
-header {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(120deg, #071426, #123e70, #54258a);
-  background-size: 200% 200%;
-  animation: lumiereEntete 8s ease infinite;
-  border-bottom: 1px solid rgba(120, 190, 255, 0.6);
-  box-shadow: 0 0 25px rgba(40, 140, 255, 0.35);
-}
-
-@keyframes lumiereEntete {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-header h1 {
-  text-shadow:
-    0 0 8px #7dd3fc,
-    0 0 20px #398bff,
-    0 0 35px #7c3aed;
-}
-
-/* Navigation */
-
-nav {
-  background: rgba(3, 13, 30, 0.92);
-  border-bottom: 1px solid rgba(96, 165, 250, 0.4);
-}
-
-nav a {
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-nav a:hover {
-  color: #7dd3fc;
-  text-shadow: 0 0 12px #38bdf8;
-}
-
-/* Cartes avec effet de verre */
-
-.selection,
-.carte {
-  position: relative;
-  overflow: hidden;
-  color: #eaf3ff;
-  background: rgba(12, 29, 55, 0.82);
-  border: 1px solid rgba(125, 211, 252, 0.28);
-  border-radius: 16px;
-  box-shadow:
-    0 8px 30px rgba(0, 0, 0, 0.3),
-    0 0 18px rgba(59, 130, 246, 0.12);
-  backdrop-filter: blur(12px);
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease,
-    border-color 0.35s ease;
-}
-
-.selection:hover,
-.carte:hover {
-  transform: translateY(-4px);
-  border-color: rgba(125, 211, 252, 0.75);
-  box-shadow:
-    0 12px 35px rgba(0, 0, 0, 0.35),
-    0 0 22px rgba(56, 189, 248, 0.25),
-    0 0 45px rgba(139, 92, 246, 0.15);
-}
-
-.carte h2,
-.selection h2 {
-  color: #93c5fd;
-  text-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
-}
-
-.carte h3 {
-  color: #67e8f9;
-}
-
-/* Zone d'informations */
-
-.infos {
-  background: rgba(30, 64, 110, 0.45);
-  border: 1px solid rgba(125, 211, 252, 0.2);
-  border-radius: 10px;
-}
-
-/* Sélecteur de livre */
-
-select {
-  color: #f3f7ff;
-  background: #102744;
-  border: 1px solid #438bd1;
-  transition: box-shadow 0.3s ease;
-}
-
-select:focus {
-  outline: none;
-  border-color: #67e8f9;
-  box-shadow: 0 0 15px rgba(34, 211, 238, 0.45);
-}
-
-/* Boutons lumineux */
-
-button,
-.bouton {
-  color: white;
-  background: linear-gradient(110deg, #0878d1, #6d3ce8);
-  background-size: 200% 200%;
-  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background-position 0.4s ease;
-}
-
-button:hover,
-.bouton:hover {
-  transform: translateY(-3px) scale(1.02);
-  background-position: 100% 50%;
-  box-shadow:
-    0 0 12px #38bdf8,
-    0 0 25px rgba(59, 130, 246, 0.65),
-    0 0 40px rgba(139, 92, 246, 0.3);
-}
-
-/* Apparition progressive du contenu */
-
-.carte h2,
-.carte h3,
-.carte p,
-.carte .infos {
-  animation: apparition 0.7s ease both;
-}
-
-@keyframes apparition {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Pied de page */
-
-footer {
-  background: rgba(3, 13, 30, 0.95);
-  border-top: 1px solid rgba(125, 211, 252, 0.3);
-  box-shadow: 0 -5px 25px rgba(59, 130, 246, 0.12);
-}
-
-/* Respect des préférences d'accessibilité */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Bibliothèque en ligne</h1>
-    <p>Découvrez des œuvres littéraires et leurs auteurs</p>
+    <h1>📚 Bibliothèque en ligne</h1>
+
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="#livres">Nos livres</a>
+      <a href="lecteur.html">Lecteur</a>
+    </nav>
   </header>
 
-  <nav>
-    <a href="index.html">Accueil</a>
-    <a href="lecteur.html">Découvrir un livre</a>
-  </nav>
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Bienvenue dans votre univers littéraire</h2>
+
+      <p>
+        Explorez des œuvres incontournables, découvrez leurs auteurs
+        et laissez-vous emporter par le plaisir de la lecture.
+      </p>
+
+      <a href="#livres" class="bouton">Explorer la bibliothèque</a>
+    </div>
+  </section>
 
   <main>
-    <a class="retour" href="index.html">← Retour à l'accueil</a>
-
-    <section class="selection">
-      <h2>Choisir un livre</h2>
-      <p>Sélectionnez une œuvre pour découvrir sa présentation.</p>
-
-      <label for="bookSelect">Titre du livre :</label>
-
-      <select id="bookSelect">
-        <option value="miserables">Les Misérables — Victor Hugo</option>
-        <option value="petit-prince">Le Petit Prince — Antoine de Saint-Exupéry</option>
-        <option value="alchimiste">L'Alchimiste — Paulo Coelho</option>
-      </select>
-
-      <button id="discoverButton" type="button">
-        Découvrir le livre
-      </button>
-    </section>
-
-    <article class="carte" id="bookCard">
-      <h2 id="titre">Les Misérables</h2>
-
-      <div class="infos">
-        <p><strong>Auteur :</strong> <span id="auteur"></span></p>
-        <p><strong>Année de publication :</strong> <span id="annee"></span></p>
-        <p><strong>Genre :</strong> <span id="genre"></span></p>
+    <section class="bibliotheque" id="livres">
+      <div class="section-titre">
+        <h2>Notre sélection de livres</h2>
+        <p>Choisissez une œuvre et découvrez son univers.</p>
       </div>
 
-      <h3>Biographie de l'auteur</h3>
-      <p id="biographie"></p>
+      <label for="recherche" style="display:none;">Rechercher un livre</label>
+      <input
+        type="search"
+        id="recherche"
+        class="recherche"
+        placeholder="🔎 Rechercher un livre ou un auteur..."
+        aria-label="Rechercher un livre ou un auteur"
+      >
 
-      <h3>Résumé détaillé</h3>
-      <p id="resume"></p>
+      <div class="grille" id="grilleLivres">
+        <article class="livre" data-recherche="les misérables victor hugo roman historique social">
+          <div class="icone" aria-hidden="true">📕</div>
+          <h3>Les Misérables</h3>
+          <p class="auteur">Victor Hugo</p>
+          <p>
+            Découvrez l'histoire de Jean Valjean, un homme qui cherche
+            à reconstruire sa vie dans une société marquée par les inégalités.
+          </p>
+          <a class="bouton" href="lecteur.html">
+            Découvrir le livre →
+          </a>
+        </article>
 
-      <h3>Personnages principaux</h3>
-      <p id="personnages"></p>
+        <article class="livre" data-recherche="le petit prince antoine de saint exupéry conte philosophique amitié">
+          <div class="icone" aria-hidden="true">📘</div>
+          <h3>Le Petit Prince</h3>
+          <p class="auteur">Antoine de Saint-Exupéry</p>
+          <p>
+            Partez à la rencontre d'un petit voyageur qui nous apprend
+            la valeur de l'amitié, de l'amour et des choses essentielles.
+          </p>
+          <a class="bouton" href="lecteur.html">
+            Découvrir le livre →
+          </a>
+        </article>
 
-      <h3>Leçons à retenir</h3>
-      <p id="lecons"></p>
+        <article class="livre" data-recherche="l'alchimiste alchimiste paulo coelho rêve aventure roman philosophique">
+          <div class="icone" aria-hidden="true">📗</div>
+          <h3>L'Alchimiste</h3>
+          <p class="auteur">Paulo Coelho</p>
+          <p>
+            Suivez Santiago dans un voyage initiatique à la recherche
+            d'un trésor et à la découverte de lui-même.
+          </p>
+          <a class="bouton" href="lecteur.html">
+            Découvrir le livre →
+          </a>
+        </article>
+      </div>
 
-      <div id="sourceLink"></div>
-    </article>
+      <p class="aucun-resultat" id="aucunResultat">
+        Aucun livre ne correspond à votre recherche.
+      </p>
+    </section>
+
+    <section class="presentation">
+      <h2>Prêt à commencer votre lecture ?</h2>
+      <p>
+        Accédez à notre lecteur pour choisir un ouvrage et consulter
+        les contenus disponibles.
+      </p>
+      <a href="lecteur.html" class="bouton">Ouvrir le lecteur 📖</a>
+    </section>
   </main>
 
   <footer>
-    <p>© 2026 — Bibliothèque en ligne | Projet éducatif</p>
+    <p>© 2026 — Bibliothèque en ligne | Lire, découvrir et apprendre.</p>
   </footer>
 
   <script>
-    const books = {
-      "miserables": {
-        titre: "Les Misérables",
-        auteur: "Victor Hugo",
-        annee: "1862",
-        genre: "Roman historique et social",
+    const recherche = document.getElementById("recherche");
+    const livres = document.querySelectorAll(".livre");
+    const aucunResultat = document.getElementById("aucunResultat");
 
-        biographie:
-          "Victor Hugo (1802-1885) est un écrivain, poète et dramaturge français. " +
-          "Figure majeure du romantisme, il a écrit des œuvres célèbres comme " +
-          "Notre-Dame de Paris et Les Misérables. Ses écrits abordent notamment " +
-          "la justice, la pauvreté, la liberté et la dignité humaine.",
+    recherche.addEventListener("input", function () {
+      const terme = recherche.value
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
 
-        resume:
-          "Les Misérables raconte le parcours de Jean Valjean, un ancien forçat " +
-          "qui tente de reconstruire sa vie après avoir été emprisonné pour le vol " +
-          "d'un pain. Grâce à la bonté de l'évêque Myriel, il décide de devenir " +
-          "un homme honnête et de faire le bien autour de lui.\n\n" +
-          "Sous une nouvelle identité, Jean Valjean devient un homme respecté et " +
-          "prend soin de Cosette, la fille de Fantine, une femme pauvre qui a subi " +
-          "de nombreuses injustices. Il doit cependant échapper à l'inspecteur " +
-          "Javert, qui le poursuit au nom de la loi.\n\n" +
-          "L'histoire se déroule dans une société marquée par les inégalités, " +
-          "la misère et les bouleversements politiques. À travers les destins de " +
-          "plusieurs personnages, Victor Hugo montre les conséquences de la " +
-          "pauvreté et l'importance de la compassion, de la justice et de la solidarité.",
+      let nombreVisible = 0;
 
-        personnages:
-          "• Jean Valjean : ancien forçat qui cherche la rédemption.\n" +
-          "• Cosette : jeune fille recueillie et protégée par Jean Valjean.\n" +
-          "• Fantine : mère de Cosette, confrontée à la pauvreté.\n" +
-          "• Javert : inspecteur attaché à l'application stricte de la loi.\n" +
-          "• Marius : jeune homme engagé dans les événements politiques.",
+      livres.forEach(function (livre) {
+        const contenu = (
+          livre.textContent + " " + livre.dataset.recherche
+        )
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "");
 
-        lecons:
-          "• La bonté peut aider une personne à changer de vie.\n" +
-          "• La pauvreté et l'exclusion peuvent conduire à de grandes souffrances.\n" +
-          "• La justice doit aussi tenir compte de la dignité humaine.\n" +
-          "• La solidarité et le sacrifice peuvent transformer des vies.",
+        const correspond = contenu.includes(terme);
 
-        url: "https://fr.wikisource.org/wiki/Les_Misérables"
-      },
+        livre.style.display = correspond ? "" : "none";
 
-      "petit-prince": {
-        titre: "Le Petit Prince",
-        auteur: "Antoine de Saint-Exupéry",
-        annee: "1943",
-        genre: "Conte philosophique",
+        if (correspond) {
+          nombreVisible++;
+        }
+      });
 
-        biographie:
-          "Antoine de Saint-Exupéry (1900-1944) est un écrivain et aviateur " +
-          "français. Son expérience de pilote a influencé plusieurs de ses œuvres. " +
-          "Le Petit Prince, publié en 1943, est devenu un livre célèbre dans le " +
-          "monde entier pour sa réflexion sur l'amitié, l'amour et le sens de la vie.",
-
-        resume:
-          "Le récit commence lorsqu'un aviateur tombe en panne dans le désert " +
-          "du Sahara. Il y rencontre un mystérieux petit garçon venu d'une autre " +
-          "planète : le Petit Prince.\n\n" +
-          "Au fil de leurs conversations, le garçon raconte son voyage à travers " +
-          "plusieurs astéroïdes. Il y a rencontré des personnages qui représentent " +
-          "différentes attitudes humaines, comme le besoin de pouvoir, la vanité " +
-          "ou l'obsession du travail.\n\n" +
-          "Sur Terre, le Petit Prince découvre le renard, qui lui apprend que les " +
-          "liens affectifs demandent du temps et de la responsabilité. Il comprend " +
-          "ainsi la valeur particulière de la rose qu'il a laissée sur sa planète.\n\n" +
-          "À travers ce voyage, le livre invite le lecteur à regarder au-delà des " +
-          "apparences et à retrouver l'émerveillement, l'amitié et l'essentiel.",
-
-        personnages:
-          "• Le Petit Prince : un enfant curieux qui cherche à comprendre le monde.\n" +
-          "• L'aviateur : le narrateur qui rencontre le Petit Prince.\n" +
-          "• La rose : une fleur à laquelle le Petit Prince est profondément attaché.\n" +
-          "• Le renard : il enseigne au Petit Prince la valeur des liens affectifs.\n" +
-          "• Le serpent : personnage mystérieux associé au retour du Petit Prince.",
-
-        lecons:
-          "• L'amitié se construit avec du temps et de l'attention.\n" +
-          "• Il faut prendre soin de ceux que l'on aime.\n" +
-          "• Les apparences ne révèlent pas toujours la vraie valeur des choses.\n" +
-          "• L'imagination aide à mieux comprendre le monde.",
-
-        url: "https://fr.wikipedia.org/wiki/Le_Petit_Prince"
-      },
-
-      "alchimiste": {
-        titre: "L'Alchimiste",
-        auteur: "Paulo Coelho",
-        annee: "1988",
-        genre: "Roman philosophique",
-
-        biographie:
-          "Paulo Coelho, né en 1947 au Brésil, est un écrivain connu dans le monde " +
-          "entier. Ses romans abordent souvent la quête de soi, les rêves, la " +
-          "spiritualité et les choix qui donnent un sens à l'existence. " +
-          "L'Alchimiste est l'une de ses œuvres les plus connues.",
-
-        resume:
-          "L'Alchimiste raconte l'histoire de Santiago, un jeune berger espagnol " +
-          "qui fait un rêve récurrent au sujet d'un trésor situé près des pyramides " +
-          "d'Égypte. Encouragé à poursuivre ce rêve, il décide de quitter son pays.\n\n" +
-          "Pendant son voyage, Santiago rencontre plusieurs personnes qui l'aident " +
-          "à avancer, notamment un roi mystérieux, un marchand de cristaux et un " +
-          "alchimiste. Chacune de ces rencontres lui apprend quelque chose sur " +
-          "la patience, le courage et la confiance en soi.\n\n" +
-          "Son parcours est ponctué d'obstacles et de découvertes. Santiago apprend " +
-          "à observer le monde, à écouter son intuition et à comprendre ce qui compte " +
-          "réellement pour lui.\n\n" +
-          "Le roman propose une réflexion sur les rêves personnels et sur la manière " +
-          "dont le voyage peut transformer celui qui le réalise.",
-
-        personnages:
-          "• Santiago : jeune berger qui part à la recherche d'un trésor.\n" +
-          "• Le roi de Salem : personnage qui encourage Santiago à poursuivre son rêve.\n" +
-          "• Le marchand de cristaux : il apprend à Santiago la patience et le travail.\n" +
-          "• L'alchimiste : guide qui accompagne Santiago dans sa quête.\n" +
-          "• Fatima : jeune femme que Santiago rencontre au cours de son voyage.",
-
-        lecons:
-          "• Il est important d'oser poursuivre ses rêves.\n" +
-          "• Les difficultés peuvent devenir des occasions d'apprendre.\n" +
-          "• La patience et la persévérance aident à avancer.\n" +
-          "• Le chemin parcouru peut être aussi important que le résultat.",
-
-        url: "https://fr.wikipedia.org/wiki/L%27Alchimiste_(Coelho)"
-      }
-    };
-
-    const bookSelect = document.getElementById("bookSelect");
-    const discoverButton = document.getElementById("discoverButton");
-
-    function showBook() {
-      const book = books[bookSelect.value];
-
-      if (!book) {
-        return;
-      }
-
-      document.getElementById("titre").textContent = book.titre;
-      document.getElementById("auteur").textContent = book.auteur;
-      document.getElementById("annee").textContent = book.annee;
-      document.getElementById("genre").textContent = book.genre;
-      document.getElementById("biographie").textContent = book.biographie;
-      document.getElementById("resume").textContent = book.resume;
-      document.getElementById("personnages").textContent = book.personnages;
-      document.getElementById("lecons").textContent = book.lecons;
-
-      const sourceLink = document.getElementById("sourceLink");
-      sourceLink.replaceChildren();
-
-      const link = document.createElement("a");
-      link.href = book.url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.className = "bouton";
-      link.textContent = "Consulter la source du livre";
-
-      sourceLink.appendChild(link);
-    }
-
-    discoverButton.addEventListener("click", showBook);
-
-    bookSelect.addEventListener("change", showBook);
-
-    showBook();
+      aucunResultat.style.display =
+        nombreVisible === 0 ? "block" : "none";
+    });
   </script>
 </body>
 </html>
