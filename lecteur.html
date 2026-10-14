@@ -4,218 +4,376 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lecteur de livres | Ma bibliothèque</title>
+  <title>Découvrir un livre | Bibliothèque en ligne</title>
+
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
-      max-width: 950px;
-      margin: 35px auto;
-      padding: 20px;
-      font-family: Georgia, serif;
-      line-height: 1.8;
-      color: #26372d;
-      background: #f5f3ed;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f5f9;
+      color: #263238;
+      line-height: 1.7;
     }
 
-    header, .panel, article {
+    header {
+      background: #17365d;
+      color: white;
+      padding: 25px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin-bottom: 0;
+    }
+
+    nav {
+      background: #102744;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      width: 92%;
+      max-width: 950px;
+      margin: 30px auto;
+    }
+
+    .selection,
+    .carte {
       background: white;
       padding: 25px;
-      border-radius: 14px;
-      margin-bottom: 22px;
-      box-shadow: 0 5px 20px #0000000a;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      margin-bottom: 25px;
     }
 
-    h1, h2, h3 { line-height: 1.4; }
-    h1, .center { text-align: center; }
-    h2 { color: #244a3b; }
-    h3 { margin-bottom: 5px; }
-
-    select, button, .bouton {
-      padding: 12px 16px;
-      margin: 6px 4px;
-      border: 0;
-      border-radius: 7px;
-      font: 16px Arial, sans-serif;
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
     }
 
     select {
       width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 16px;
       background: white;
-      border: 1px solid #ccc;
+      margin-bottom: 15px;
     }
 
-    button, .bouton {
-      background: #244a3b;
+    button,
+    .bouton {
+      display: inline-block;
+      background: #1769aa;
       color: white;
-      cursor: pointer;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: bold;
       text-decoration: none;
+      cursor: pointer;
+    }
+
+    button:hover,
+    .bouton:hover {
+      background: #104b7c;
+    }
+
+    .carte h2 {
+      color: #17365d;
+      border-bottom: 2px solid #e5edf5;
+      padding-bottom: 8px;
+    }
+
+    .carte h3 {
+      color: #1769aa;
+      margin-top: 25px;
+    }
+
+    .infos {
+      background: #edf5fc;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 18px 0;
+    }
+
+    .infos p {
+      margin: 5px 0;
+    }
+
+    #resume,
+    #biographie,
+    #personnages,
+    #lecons {
+      white-space: pre-line;
+    }
+
+    .retour {
       display: inline-block;
+      margin-bottom: 20px;
+      color: #1769aa;
+      font-weight: bold;
+      text-decoration: none;
     }
-
-    button:hover, .bouton:hover { background: #173629; }
-
-    .section-info {
-      padding: 12px 18px;
-      margin: 16px 0;
-      background: #f7f8f5;
-      border-left: 4px solid #c8a75b;
-      border-radius: 5px;
-    }
-
-    .etiquette {
-      display: inline-block;
-      background: #e7efe8;
-      color: #244a3b;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font: 13px Arial, sans-serif;
-    }
-
-    #status { color: #58665d; }
-    #bookDescription { font-size: 1.05rem; }
-    .source { margin-top: 22px; }
 
     footer {
+      background: #102744;
+      color: white;
       text-align: center;
-      color: #68736b;
-      padding: 20px;
+      padding: 18px;
+      margin-top: 40px;
     }
 
     @media (max-width: 600px) {
-      body { padding: 12px; margin: 12px auto; }
-      header, .panel, article { padding: 17px; }
+      header h1 {
+        font-size: 23px;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 5px 8px;
+      }
+
+      .selection,
+      .carte {
+        padding: 18px;
+      }
     }
   </style>
 </head>
+
 <body>
   <header>
-    <h1>📚 Ma bibliothèque</h1>
-    <p class="center">Découvre les œuvres, leurs auteurs et les idées essentielles.</p>
-    <p class="center">
-      <a class="bouton" href="index.html">← Retour à la bibliothèque</a>
-    </p>
+    <h1>Bibliothèque en ligne</h1>
+    <p>Découvrez des œuvres littéraires et leurs auteurs</p>
   </header>
 
-  <section class="panel">
-    <label for="bookSelect"><strong>Choisir un livre :</strong></label>
-    <select id="bookSelect">
-      <option value="miserables">Les Misérables — Victor Hugo</option>
-      <option value="petit-prince">Le Petit Prince — Antoine de Saint-Exupéry</option>
-      <option value="alchimiste">L’Alchimiste — Paulo Coelho</option>
-    </select>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="lecteur.html">Découvrir un livre</a>
+  </nav>
 
-    <div class="center">
-      <button id="readButton" type="button">Découvrir le livre</button>
-    </div>
+  <main>
+    <a class="retour" href="index.html">← Retour à l'accueil</a>
 
-    <p id="status" role="status">Sélectionne un livre, puis clique sur « Découvrir le livre ».</p>
-  </section>
+    <section class="selection">
+      <h2>Choisir un livre</h2>
+      <p>Sélectionnez une œuvre pour découvrir sa présentation.</p>
 
-  <article id="bookCard">
-    <span class="etiquette">Présentation du livre</span>
-    <h2 id="bookTitle">Bienvenue dans le lecteur</h2>
-    <p id="bookDescription">La présentation du livre apparaîtra ici.</p>
+      <label for="bookSelect">Titre du livre :</label>
 
-    <section class="section-info">
-      <h3>À propos de l’auteur</h3>
-      <p id="authorBio"></p>
+      <select id="bookSelect">
+        <option value="miserables">Les Misérables — Victor Hugo</option>
+        <option value="petit-prince">Le Petit Prince — Antoine de Saint-Exupéry</option>
+        <option value="alchimiste">L'Alchimiste — Paulo Coelho</option>
+      </select>
+
+      <button id="discoverButton" type="button">
+        Découvrir le livre
+      </button>
     </section>
 
-    <section class="section-info">
+    <article class="carte" id="bookCard">
+      <h2 id="titre">Les Misérables</h2>
+
+      <div class="infos">
+        <p><strong>Auteur :</strong> <span id="auteur"></span></p>
+        <p><strong>Année de publication :</strong> <span id="annee"></span></p>
+        <p><strong>Genre :</strong> <span id="genre"></span></p>
+      </div>
+
+      <h3>Biographie de l'auteur</h3>
+      <p id="biographie"></p>
+
       <h3>Résumé détaillé</h3>
-      <p id="detailedSummary"></p>
-    </section>
+      <p id="resume"></p>
 
-    <section class="section-info">
       <h3>Personnages principaux</h3>
-      <p id="characters"></p>
-    </section>
+      <p id="personnages"></p>
 
-    <section class="section-info">
-      <h3>Leçons et thèmes à retenir</h3>
-      <p id="lessons"></p>
-    </section>
+      <h3>Leçons à retenir</h3>
+      <p id="lecons"></p>
 
-    <p class="source" id="sourceLink"></p>
-  </article>
+      <div id="sourceLink"></div>
+    </article>
+  </main>
 
-  <footer>Ma bibliothèque en ligne — Lire, découvrir et apprendre.</footer>
+  <footer>
+    <p>© 2026 — Bibliothèque en ligne | Projet éducatif</p>
+  </footer>
 
   <script>
     const books = {
-      miserables: {
-        title: "Les Misérables",
-        author: "Victor Hugo",
-        description:
-          "Publié en 1862, ce grand roman français explore la pauvreté, la justice, la compassion et la possibilité de changer sa vie.",
-        bio:
-          "Victor Hugo (1802-1885) est un écrivain, poète et dramaturge français. Figure majeure du romantisme, il a écrit des œuvres célèbres comme Notre-Dame de Paris et Les Misérables. Ses écrits abordent souvent la justice sociale et la dignité humaine.",
-        summary:
-          "Jean Valjean, condamné pour avoir volé du pain et marqué par des années de prison, cherche à reconstruire sa vie après sa rencontre avec l’évêque Myriel. Malgré les préjugés de la société, il tente de devenir un homme juste. Son parcours croise celui de Fantine, qui lutte pour sa fille Cosette, et de Javert, un policier obsédé par l’application de la loi. Le roman suit plusieurs destins dans une société traversée par la misère, les inégalités et les bouleversements politiques.",
-        characters:
-          "Jean Valjean : ancien prisonnier qui cherche la rédemption. Fantine : mère qui se sacrifie pour sa fille. Cosette : fille de Fantine, dont Valjean prend soin. Javert : policier attaché à la loi. Marius : jeune homme engagé dans les événements politiques.",
-        lessons:
-          "La compassion peut transformer une vie. La justice doit tenir compte de l’humanité. La pauvreté et l’exclusion peuvent enfermer les personnes dans des situations difficiles. Le pardon, le courage et la solidarité sont essentiels.",
-      
-          url: "https://fr.wikisource.org/wiki/Les_Mis%C3%A9rables/Tome_1"
+      "miserables": {
+        titre: "Les Misérables",
+        auteur: "Victor Hugo",
+        annee: "1862",
+        genre: "Roman historique et social",
+
+        biographie:
+          "Victor Hugo (1802-1885) est un écrivain, poète et dramaturge français. " +
+          "Figure majeure du romantisme, il a écrit des œuvres célèbres comme " +
+          "Notre-Dame de Paris et Les Misérables. Ses écrits abordent notamment " +
+          "la justice, la pauvreté, la liberté et la dignité humaine.",
+
+        resume:
+          "Les Misérables raconte le parcours de Jean Valjean, un ancien forçat " +
+          "qui tente de reconstruire sa vie après avoir été emprisonné pour le vol " +
+          "d'un pain. Grâce à la bonté de l'évêque Myriel, il décide de devenir " +
+          "un homme honnête et de faire le bien autour de lui.\n\n" +
+          "Sous une nouvelle identité, Jean Valjean devient un homme respecté et " +
+          "prend soin de Cosette, la fille de Fantine, une femme pauvre qui a subi " +
+          "de nombreuses injustices. Il doit cependant échapper à l'inspecteur " +
+          "Javert, qui le poursuit au nom de la loi.\n\n" +
+          "L'histoire se déroule dans une société marquée par les inégalités, " +
+          "la misère et les bouleversements politiques. À travers les destins de " +
+          "plusieurs personnages, Victor Hugo montre les conséquences de la " +
+          "pauvreté et l'importance de la compassion, de la justice et de la solidarité.",
+
+        personnages:
+          "• Jean Valjean : ancien forçat qui cherche la rédemption.\n" +
+          "• Cosette : jeune fille recueillie et protégée par Jean Valjean.\n" +
+          "• Fantine : mère de Cosette, confrontée à la pauvreté.\n" +
+          "• Javert : inspecteur attaché à l'application stricte de la loi.\n" +
+          "• Marius : jeune homme engagé dans les événements politiques.",
+
+        lecons:
+          "• La bonté peut aider une personne à changer de vie.\n" +
+          "• La pauvreté et l'exclusion peuvent conduire à de grandes souffrances.\n" +
+          "• La justice doit aussi tenir compte de la dignité humaine.\n" +
+          "• La solidarité et le sacrifice peuvent transformer des vies.",
+
+        url: "https://fr.wikisource.org/wiki/Les_Misérables"
       },
 
       "petit-prince": {
-        title: "Le Petit Prince",
-        author: "Antoine de Saint-Exupéry",
-        description:
-          "Conte philosophique publié en 1943, Le Petit Prince invite à regarder le monde avec curiosité, sensibilité et imagination.",
-        bio:
-          "Antoine de Saint-Exupéry (1900-1944) est un écrivain et aviateur français. Son expérience de pilote a profondément marqué son œuvre. Il est également connu pour Vol de nuit et Terre des hommes. Le Petit Prince est son ouvrage le plus célèbre.",
-        summary:
-          "Un aviateur dont l’avion est tombé en panne dans le désert rencontre un mystérieux petit garçon venu d’une autre planète. Le Petit Prince raconte ses voyages et les rencontres qu’il a faites, notamment avec un roi, un vaniteux, un businessman, un allumeur de réverbères et un renard. À travers ces personnages, le récit interroge les comportements des adultes et leur rapport au pouvoir, à la possession et au temps. Sa relation avec une rose lui apprend aussi que l’attachement implique de l’attention et de la responsabilité.",
-        characters:
-          "Le Petit Prince : voyageur curieux qui cherche à comprendre le monde. L’aviateur : narrateur qui rencontre le garçon dans le désert. La rose : fleur précieuse pour le Petit Prince. Le renard : personnage qui lui enseigne l’importance des liens. Le serpent : personnage mystérieux rencontré sur Terre.",
-        lessons:
-          "L’amitié demande du temps et de l’attention. Il faut prendre soin de ceux auxquels on tient. Les apparences ne suffisent pas pour comprendre une personne. L’imagination, la curiosité et la sincérité permettent de mieux regarder le monde.",
-          url: "https://fr.wikipedia.org/wiki/Le_Petit_Prince"
+        titre: "Le Petit Prince",
+        auteur: "Antoine de Saint-Exupéry",
+        annee: "1943",
+        genre: "Conte philosophique",
+
+        biographie:
+          "Antoine de Saint-Exupéry (1900-1944) est un écrivain et aviateur " +
+          "français. Son expérience de pilote a influencé plusieurs de ses œuvres. " +
+          "Le Petit Prince, publié en 1943, est devenu un livre célèbre dans le " +
+          "monde entier pour sa réflexion sur l'amitié, l'amour et le sens de la vie.",
+
+        resume:
+          "Le récit commence lorsqu'un aviateur tombe en panne dans le désert " +
+          "du Sahara. Il y rencontre un mystérieux petit garçon venu d'une autre " +
+          "planète : le Petit Prince.\n\n" +
+          "Au fil de leurs conversations, le garçon raconte son voyage à travers " +
+          "plusieurs astéroïdes. Il y a rencontré des personnages qui représentent " +
+          "différentes attitudes humaines, comme le besoin de pouvoir, la vanité " +
+          "ou l'obsession du travail.\n\n" +
+          "Sur Terre, le Petit Prince découvre le renard, qui lui apprend que les " +
+          "liens affectifs demandent du temps et de la responsabilité. Il comprend " +
+          "ainsi la valeur particulière de la rose qu'il a laissée sur sa planète.\n\n" +
+          "À travers ce voyage, le livre invite le lecteur à regarder au-delà des " +
+          "apparences et à retrouver l'émerveillement, l'amitié et l'essentiel.",
+
+        personnages:
+          "• Le Petit Prince : un enfant curieux qui cherche à comprendre le monde.\n" +
+          "• L'aviateur : le narrateur qui rencontre le Petit Prince.\n" +
+          "• La rose : une fleur à laquelle le Petit Prince est profondément attaché.\n" +
+          "• Le renard : il enseigne au Petit Prince la valeur des liens affectifs.\n" +
+          "• Le serpent : personnage mystérieux associé au retour du Petit Prince.",
+
+        lecons:
+          "• L'amitié se construit avec du temps et de l'attention.\n" +
+          "• Il faut prendre soin de ceux que l'on aime.\n" +
+          "• Les apparences ne révèlent pas toujours la vraie valeur des choses.\n" +
+          "• L'imagination aide à mieux comprendre le monde.",
+
+        url: "https://fr.wikipedia.org/wiki/Le_Petit_Prince"
       },
 
-      alchimiste: {
-        title: "L’Alchimiste",
-        author: "Paulo Coelho",
-        description:
-          "Roman publié en 1988, L’Alchimiste raconte un voyage initiatique consacré aux rêves, aux choix personnels et à la recherche de sens.",
-        bio:
-          "Paulo Coelho, né en 1947 à Rio de Janeiro, est un écrivain brésilien. Ses romans abordent fréquemment la quête personnelle, la spiritualité et le sens de l’existence. L’Alchimiste est devenu son œuvre la plus connue à l’échelle internationale.",
-        summary:
-          "Santiago, un jeune berger andalou, fait un rêve récurrent qui l’encourage à partir à la recherche d’un trésor près des pyramides d’Égypte. Il quitte sa vie habituelle et traverse différentes épreuves. Il rencontre notamment un marchand de cristaux, qui lui fait découvrir la valeur de la persévérance, puis un Anglais intéressé par l’alchimie et un alchimiste qui l’accompagne dans une partie de son parcours. Au fil de ses rencontres, Santiago apprend à observer le monde, à surmonter ses peurs et à mieux comprendre ce qu’il recherche réellement.",
-        characters:
-          "Santiago : jeune berger en quête d’un trésor. Melchisédek : roi qui encourage Santiago à entreprendre son voyage. Le marchand de cristaux : commerçant auprès duquel Santiago travaille. Fatima : jeune femme rencontrée dans le désert. L’alchimiste : guide qui aide Santiago à approfondir sa quête.",
-        lessons:
-          "Il est important d’oser poursuivre ses objectifs. Les échecs et les obstacles peuvent devenir des occasions d’apprendre. La patience, l’écoute et le courage aident à avancer. Le voyage peut transformer autant que le but recherché.",
+      "alchimiste": {
+        titre: "L'Alchimiste",
+        auteur: "Paulo Coelho",
+        annee: "1988",
+        genre: "Roman philosophique",
+
+        biographie:
+          "Paulo Coelho, né en 1947 au Brésil, est un écrivain connu dans le monde " +
+          "entier. Ses romans abordent souvent la quête de soi, les rêves, la " +
+          "spiritualité et les choix qui donnent un sens à l'existence. " +
+          "L'Alchimiste est l'une de ses œuvres les plus connues.",
+
+        resume:
+          "L'Alchimiste raconte l'histoire de Santiago, un jeune berger espagnol " +
+          "qui fait un rêve récurrent au sujet d'un trésor situé près des pyramides " +
+          "d'Égypte. Encouragé à poursuivre ce rêve, il décide de quitter son pays.\n\n" +
+          "Pendant son voyage, Santiago rencontre plusieurs personnes qui l'aident " +
+          "à avancer, notamment un roi mystérieux, un marchand de cristaux et un " +
+          "alchimiste. Chacune de ces rencontres lui apprend quelque chose sur " +
+          "la patience, le courage et la confiance en soi.\n\n" +
+          "Son parcours est ponctué d'obstacles et de découvertes. Santiago apprend " +
+          "à observer le monde, à écouter son intuition et à comprendre ce qui compte " +
+          "réellement pour lui.\n\n" +
+          "Le roman propose une réflexion sur les rêves personnels et sur la manière " +
+          "dont le voyage peut transformer celui qui le réalise.",
+
+        personnages:
+          "• Santiago : jeune berger qui part à la recherche d'un trésor.\n" +
+          "• Le roi de Salem : personnage qui encourage Santiago à poursuivre son rêve.\n" +
+          "• Le marchand de cristaux : il apprend à Santiago la patience et le travail.\n" +
+          "• L'alchimiste : guide qui accompagne Santiago dans sa quête.\n" +
+          "• Fatima : jeune femme que Santiago rencontre au cours de son voyage.",
+
+        lecons:
+          "• Il est important d'oser poursuivre ses rêves.\n" +
+          "• Les difficultés peuvent devenir des occasions d'apprendre.\n" +
+          "• La patience et la persévérance aident à avancer.\n" +
+          "• Le chemin parcouru peut être aussi important que le résultat.",
+
         url: "https://fr.wikipedia.org/wiki/L%27Alchimiste_(Coelho)"
       }
     };
 
-    const select = document.getElementById("bookSelect");
-    const button = document.getElementById("readButton");
-    const status = document.getElementById("status");
-    const title = document.getElementById("bookTitle");
-    const description = document.getElementById("bookDescription");
-    const bio = document.getElementById("authorBio");
-    const summary = document.getElementById("detailedSummary");
-    const characters = document.getElementById("characters");
-    const lessons = document.getElementById("lessons");
-    const sourceLink = document.getElementById("sourceLink");
+    const bookSelect = document.getElementById("bookSelect");
+    const discoverButton = document.getElementById("discoverButton");
 
     function showBook() {
-      const book = books[select.value];
+      const book = books[bookSelect.value];
 
-      title.textContent = book.title;
-      description.textContent = book.description;
-      bio.textContent = book.bio;
-      summary.textContent = book.summary;
-      characters.textContent = book.characters;
-      lessons.textContent = book.lessons;
-      status.textContent = "Présentation de « " + book.title + " » affichée.";
+      if (!book) {
+        return;
+      }
 
+      document.getElementById("titre").textContent = book.titre;
+      document.getElementById("auteur").textContent = book.auteur;
+      document.getElementById("annee").textContent = book.annee;
+      document.getElementById("genre").textContent = book.genre;
+      document.getElementById("biographie").textContent = book.biographie;
+      document.getElementById("resume").textContent = book.resume;
+      document.getElementById("personnages").textContent = book.personnages;
+      document.getElementById("lecons").textContent = book.lecons;
+
+      const sourceLink = document.getElementById("sourceLink");
       sourceLink.replaceChildren();
 
       const link = document.createElement("a");
@@ -223,12 +381,15 @@
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       link.className = "bouton";
-      link.textContent = "Consulter la source de lecture";
+      link.textContent = "Consulter la source du livre";
 
       sourceLink.appendChild(link);
     }
 
-    button.addEventListener("click", showBook);
+    discoverButton.addEventListener("click", showBook);
+
+    bookSelect.addEventListener("change", showBook);
+
     showBook();
   </script>
 </body>
