@@ -2,57 +2,128 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lire Les Misérables</title>
-    <style>
-        body {
-            font-family: Georgia, serif;
-            max-width: 850px;
-            margin: 40px auto;
-            padding: 20px;
-            line-height: 1.8;
-            color: #292929;
-            background: #f8f6f0;
-        }
-        h1, p { text-align: center; }
-        .bouton {
-            display: inline-block;
-            padding: 10px 16px;
-            margin: 5px;
-            background: #244a3b;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            font-family: Arial, sans-serif;
-        }
-        .commandes { text-align: center; margin: 25px 0; }
-        iframe {
-            width: 100%;
-            min-height: 70vh;
-            border: 1px solid #ddd;
-            background: white;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lecteur de livres | Ma bibliothèque</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      max-width: 900px;
+      margin: 35px auto;
+      padding: 20px;
+      font-family: Georgia, serif;
+      line-height: 1.8;
+      color: #26372d;
+      background: #f5f3ed;
+    }
+    header, .panel, article {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 22px;
+    }
+    h1, .center { text-align: center; }
+    select, button, .bouton {
+      display: inline-block;
+      padding: 12px 16px;
+      margin: 6px 4px;
+      border: 0;
+      border-radius: 7px;
+      font: 16px Arial, sans-serif;
+    }
+    select { width: 100%; background: white; border: 1px solid #ccc; }
+    button, .bouton {
+      background: #244a3b;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    button:hover, .bouton:hover { background: #173629; }
+    #status { color: #58665d; }
+    article { background: #fffdf8; }
+    @media (max-width: 600px) {
+      body { padding: 12px; margin: 12px auto; }
+      header, .panel, article { padding: 16px; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Les Misérables</h1>
-    <p>Victor Hugo — Tome I : Fantine</p>
+  <header>
+    <h1>📚 Ma bibliothèque</h1>
+    <p class="center">Choisis un ouvrage et découvre son contenu.</p>
+    <p class="center">
+      <a class="bouton" href="index.html">Retour à la bibliothèque</a>
+    </p>
+  </header>
 
-    <div class="commandes">
-        <a class="bouton" href="index.html">Retour à la bibliothèque</a>
-        <a class="bouton"
-           href="https://fr.wikisource.org/wiki/Les_Mis%C3%A9rables/Tome_1"
-           target="_blank" rel="noopener noreferrer">
-            Ouvrir le livre sur Wikisource
-        </a>
+  <section class="panel">
+    <label for="bookSelect">Choisir un livre :</label>
+    <select id="bookSelect">
+      <option value="miserables">Les Misérables — Victor Hugo</option>
+      <option value="petit-prince">Le Petit Prince — Antoine de Saint-Exupéry</option>
+      <option value="alchimiste">L’Alchimiste — Paulo Coelho</option>
+    </select>
+    <div class="center">
+      <button id="readButton" type="button">Lire le livre</button>
     </div>
+    <p id="status" role="status">Sélectionne un livre, puis clique sur « Lire le livre ».</p>
+  </section>
 
-    <iframe
-        src="https://fr.wikisource.org/wiki/Les_Mis%C3%A9rables/Tome_1"
-        title="Lecture des Misérables sur Wikisource">
-    </iframe>
+  <article>
+    <h2 id="bookTitle">Bienvenue dans le lecteur</h2>
+    <p id="bookDescription">
+      Le résumé et le lien de lecture apparaîtront ici.
+    </p>
+    <p id="sourceLink"></p>
+  </article>
 
-    <p>Si le texte ne s'affiche pas ci-dessous, utilise le bouton pour ouvrir le livre sur Wikisource.</p>
+  <script>
+    const books = {
+      miserables: {
+        title: "Les Misérables",
+        description:
+          "Le roman de Victor Hugo raconte les épreuves de Jean Valjean et explore la justice, la pauvreté, la rédemption et la compassion dans la France du XIXe siècle.",
+        url: "https://fr.wikisource.org/wiki/Les_Mis%C3%A9rables/Tome_1"
+      },
+      "petit-prince": {
+        title: "Le Petit Prince",
+        description:
+          "Ce conte d’Antoine de Saint-Exupéry suit un jeune voyageur qui découvre plusieurs planètes et rencontre des personnages qui l’amènent à réfléchir à l’amitié, à l’amour et à la vie.",
+        url: "https://fr.wikipedia.org/wiki/Le_Petit_Prince"
+      },
+      alchimiste: {
+        title: "L’Alchimiste",
+        description:
+          "Le roman de Paulo Coelho suit Santiago, un jeune berger parti à la recherche d’un trésor. Son voyage l’invite à écouter ses rêves et à découvrir le sens de sa quête.",
+        url: "https://fr.wikipedia.org/wiki/L%27Alchimiste_(Coelho)"
+      }
+    };
+
+    const select = document.getElementById("bookSelect");
+    const button = document.getElementById("readButton");
+    const status = document.getElementById("status");
+    const title = document.getElementById("bookTitle");
+    const description = document.getElementById("bookDescription");
+    const sourceLink = document.getElementById("sourceLink");
+
+    button.addEventListener("click", function () {
+      const book = books[select.value];
+
+      title.textContent = book.title;
+      description.textContent = book.description;
+      status.textContent = "Présentation de « " + book.title + " » affichée.";
+
+      sourceLink.replaceChildren();
+
+      const link = document.createElement("a");
+      link.href = book.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.className = "bouton";
+      link.textContent = "Consulter la source de lecture";
+
+      sourceLink.appendChild(link);
+    });
+  </script>
 </body>
 </html>
