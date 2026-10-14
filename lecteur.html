@@ -6,6 +6,198 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Découvrir un livre | Bibliothèque en ligne</title>
 
+/* ===== AMBIANCE LUMINEUSE ANIMÉE ===== */
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(
+    135deg,
+    #071426,
+    #102744,
+    #201447,
+    #071426
+  );
+  background-size: 300% 300%;
+  animation: fondLumineux 14s ease infinite;
+  color: #f3f7ff;
+}
+
+@keyframes fondLumineux {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* En-tête lumineux */
+
+header {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, #071426, #123e70, #54258a);
+  background-size: 200% 200%;
+  animation: lumiereEntete 8s ease infinite;
+  border-bottom: 1px solid rgba(120, 190, 255, 0.6);
+  box-shadow: 0 0 25px rgba(40, 140, 255, 0.35);
+}
+
+@keyframes lumiereEntete {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+header h1 {
+  text-shadow:
+    0 0 8px #7dd3fc,
+    0 0 20px #398bff,
+    0 0 35px #7c3aed;
+}
+
+/* Navigation */
+
+nav {
+  background: rgba(3, 13, 30, 0.92);
+  border-bottom: 1px solid rgba(96, 165, 250, 0.4);
+}
+
+nav a {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+nav a:hover {
+  color: #7dd3fc;
+  text-shadow: 0 0 12px #38bdf8;
+}
+
+/* Cartes avec effet de verre */
+
+.selection,
+.carte {
+  position: relative;
+  overflow: hidden;
+  color: #eaf3ff;
+  background: rgba(12, 29, 55, 0.82);
+  border: 1px solid rgba(125, 211, 252, 0.28);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.3),
+    0 0 18px rgba(59, 130, 246, 0.12);
+  backdrop-filter: blur(12px);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.selection:hover,
+.carte:hover {
+  transform: translateY(-4px);
+  border-color: rgba(125, 211, 252, 0.75);
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.35),
+    0 0 22px rgba(56, 189, 248, 0.25),
+    0 0 45px rgba(139, 92, 246, 0.15);
+}
+
+.carte h2,
+.selection h2 {
+  color: #93c5fd;
+  text-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+}
+
+.carte h3 {
+  color: #67e8f9;
+}
+
+/* Zone d'informations */
+
+.infos {
+  background: rgba(30, 64, 110, 0.45);
+  border: 1px solid rgba(125, 211, 252, 0.2);
+  border-radius: 10px;
+}
+
+/* Sélecteur de livre */
+
+select {
+  color: #f3f7ff;
+  background: #102744;
+  border: 1px solid #438bd1;
+  transition: box-shadow 0.3s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: #67e8f9;
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.45);
+}
+
+/* Boutons lumineux */
+
+button,
+.bouton {
+  color: white;
+  background: linear-gradient(110deg, #0878d1, #6d3ce8);
+  background-size: 200% 200%;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-position 0.4s ease;
+}
+
+button:hover,
+.bouton:hover {
+  transform: translateY(-3px) scale(1.02);
+  background-position: 100% 50%;
+  box-shadow:
+    0 0 12px #38bdf8,
+    0 0 25px rgba(59, 130, 246, 0.65),
+    0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+/* Apparition progressive du contenu */
+
+.carte h2,
+.carte h3,
+.carte p,
+.carte .infos {
+  animation: apparition 0.7s ease both;
+}
+
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pied de page */
+
+footer {
+  background: rgba(3, 13, 30, 0.95);
+  border-top: 1px solid rgba(125, 211, 252, 0.3);
+  box-shadow: 0 -5px 25px rgba(59, 130, 246, 0.12);
+}
+
+/* Respect des préférences d'accessibilité */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
   <style>
     * {
       box-sizing: border-box;
