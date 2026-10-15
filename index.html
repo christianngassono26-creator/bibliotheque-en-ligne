@@ -1,11 +1,10 @@
-
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#071426">
-
   <title>Accueil | Bibliothèque en ligne</title>
 
   <style>
@@ -18,13 +17,7 @@
     body {
       font-family: Arial, sans-serif;
       color: #edf5ff;
-      background: linear-gradient(
-        135deg,
-        #071426,
-        #102744,
-        #201447,
-        #071426
-      );
+      background: linear-gradient(135deg, #071426, #102744, #201447, #071426);
       background-size: 300% 300%;
       animation: fondLumineux 15s ease infinite;
       line-height: 1.7;
@@ -55,9 +48,7 @@
     header h1 {
       font-size: 1.6rem;
       color: white;
-      text-shadow:
-        0 0 8px #7dd3fc,
-        0 0 22px #398bff;
+      text-shadow: 0 0 8px #7dd3fc, 0 0 22px #398bff;
     }
 
     nav {
@@ -127,9 +118,8 @@
       font-size: clamp(2rem, 5vw, 3.5rem);
       line-height: 1.2;
       margin-bottom: 20px;
-      text-shadow:
-        0 0 12px rgba(56, 189, 248, 0.7),
-        0 0 30px rgba(139, 92, 246, 0.4);
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.7),
+                   0 0 30px rgba(139, 92, 246, 0.4);
       animation: apparition 1s ease both;
     }
 
@@ -162,18 +152,15 @@
       font-weight: bold;
       border: 1px solid rgba(147, 197, 253, 0.4);
       box-shadow: 0 0 16px rgba(59, 130, 246, 0.3);
-      transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        background-position 0.4s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease,
+                  background-position 0.4s ease;
     }
 
     .bouton:hover {
       transform: translateY(-3px);
       background-position: 100% 50%;
-      box-shadow:
-        0 0 12px #38bdf8,
-        0 0 28px rgba(59, 130, 246, 0.6);
+      box-shadow: 0 0 12px #38bdf8,
+                  0 0 28px rgba(59, 130, 246, 0.6);
     }
 
     .bibliotheque {
@@ -235,24 +222,16 @@
       border-radius: 16px;
       background: rgba(12, 29, 55, 0.85);
       border: 1px solid rgba(125, 211, 252, 0.3);
-      box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.25),
-        0 0 18px rgba(59, 130, 246, 0.1);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25),
+                  0 0 18px rgba(59, 130, 246, 0.1);
       backdrop-filter: blur(12px);
-      transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease,
-        border-color 0.35s ease;
+      transition: transform 0.35s ease, box-shadow 0.35s ease,
+                  border-color 0.35s ease;
       animation: apparition 0.8s ease both;
     }
 
-    .livre:nth-child(2) {
-      animation-delay: 0.15s;
-    }
-
-    .livre:nth-child(3) {
-      animation-delay: 0.3s;
-    }
+    .livre:nth-child(2) { animation-delay: 0.15s; }
+    .livre:nth-child(3) { animation-delay: 0.3s; }
 
     .livre::before {
       content: "";
@@ -272,15 +251,12 @@
     .livre:hover {
       transform: translateY(-8px);
       border-color: rgba(103, 232, 249, 0.85);
-      box-shadow:
-        0 12px 35px rgba(0, 0, 0, 0.35),
-        0 0 22px rgba(56, 189, 248, 0.3),
-        0 0 45px rgba(139, 92, 246, 0.2);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35),
+                  0 0 22px rgba(56, 189, 248, 0.3),
+                  0 0 45px rgba(139, 92, 246, 0.2);
     }
 
-    .livre:hover::before {
-      opacity: 0.6;
-    }
+    .livre:hover::before { opacity: 0.6; }
 
     .livre .icone {
       font-size: 3rem;
@@ -313,9 +289,7 @@
       margin-bottom: 22px;
     }
 
-    .livre .bouton {
-      position: relative;
-    }
+    .livre .bouton { position: relative; }
 
     .aucun-resultat {
       display: none;
@@ -366,25 +340,11 @@
         text-align: center;
       }
 
-      header h1 {
-        font-size: 1.35rem;
-      }
-
-      .hero {
-        padding: 60px 18px;
-      }
-
-      .bibliotheque {
-        padding: 15px 16px 45px;
-      }
-
-      .grille {
-        grid-template-columns: 1fr;
-      }
-
-      .livre {
-        padding: 23px;
-      }
+      header h1 { font-size: 1.35rem; }
+      .hero { padding: 60px 18px; }
+      .bibliotheque { padding: 15px 16px 45px; }
+      .grille { grid-template-columns: 1fr; }
+      .livre { padding: 23px; }
 
       .presentation {
         margin: 0 16px 45px;
@@ -407,7 +367,6 @@
 <body>
   <header>
     <h1>📚 Bibliothèque en ligne</h1>
-
     <nav>
       <a href="index.html">Accueil</a>
       <a href="#livres">Nos livres</a>
@@ -418,12 +377,10 @@
   <section class="hero">
     <div class="hero-content">
       <h2>Bienvenue dans votre univers littéraire</h2>
-
       <p>
         Explorez des œuvres incontournables, découvrez leurs auteurs
         et laissez-vous emporter par le plaisir de la lecture.
       </p>
-
       <a href="#livres" class="bouton">Explorer la bibliothèque</a>
     </div>
   </section>
@@ -445,6 +402,9 @@
       >
 
       <div class="grille" id="grilleLivres">
+
+        <!-- LIVRES EXISTANTS -->
+
         <article class="livre" data-recherche="les misérables victor hugo roman historique social">
           <div class="icone" aria-hidden="true">📕</div>
           <h3>Les Misérables</h3>
@@ -453,9 +413,7 @@
             Découvrez l'histoire de Jean Valjean, un homme qui cherche
             à reconstruire sa vie dans une société marquée par les inégalités.
           </p>
-          <a class="bouton" href="lecteur.html">
-            Découvrir le livre →
-          </a>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
         </article>
 
         <article class="livre" data-recherche="le petit prince antoine de saint exupéry conte philosophique amitié">
@@ -466,12 +424,10 @@
             Partez à la rencontre d'un petit voyageur qui nous apprend
             la valeur de l'amitié, de l'amour et des choses essentielles.
           </p>
-          <a class="bouton" href="lecteur.html">
-            Découvrir le livre →
-          </a>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
         </article>
 
-        <article class="livre" data-recherche="l'alchimiste alchimiste paulo coelho rêve aventure roman philosophique">
+        <article class="livre" data-recherche="l'alchimiste paulo coelho rêve aventure roman philosophique">
           <div class="icone" aria-hidden="true">📗</div>
           <h3>L'Alchimiste</h3>
           <p class="auteur">Paulo Coelho</p>
@@ -479,10 +435,149 @@
             Suivez Santiago dans un voyage initiatique à la recherche
             d'un trésor et à la découverte de lui-même.
           </p>
-          <a class="bouton" href="lecteur.html">
-            Découvrir le livre →
-          </a>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
         </article>
+
+        <!-- DÉVELOPPEMENT PERSONNEL -->
+
+        <article class="livre" data-recherche="pere riche pere pauvre robert kiyosaki argent finances education financiere entrepreneuriat">
+          <div class="icone" aria-hidden="true">💰</div>
+          <h3>Père riche, père pauvre</h3>
+          <p class="auteur">Robert T. Kiyosaki</p>
+          <p>
+            Découvrez des principes d'éducation financière, la différence
+            entre actifs et passifs et différentes façons de réfléchir à l'argent.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <article class="livre" data-recherche="7 habitudes ceux qui realisent tout entreprennent stephen covey habitudes organisation leadership">
+          <div class="icone" aria-hidden="true">🎯</div>
+          <h3>Les 7 habitudes de ceux qui réalisent tout ce qu'ils entreprennent</h3>
+          <p class="auteur">Stephen R. Covey</p>
+          <p>
+            Un ouvrage consacré aux habitudes, à la responsabilité personnelle,
+            à l'organisation et à l'amélioration des relations avec les autres.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <article class="livre" data-recherche="un rien peut tout changer james clear atomic habits habitudes productivite discipline">
+          <div class="icone" aria-hidden="true">🌱</div>
+          <h3>Un rien peut tout changer</h3>
+          <p class="auteur">James Clear</p>
+          <p>
+            Apprenez comment de petites habitudes répétées peuvent contribuer
+            à améliorer progressivement votre quotidien et vos résultats.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <!-- INFORMATIQUE ET DÉVELOPPEMENT WEB -->
+
+        <article class="livre" data-recherche="html css conception realisation sites web jon duckett informatique programmation developpement web">
+          <div class="icone" aria-hidden="true">💻</div>
+          <h3>HTML et CSS : conception et réalisation de sites web</h3>
+          <p class="auteur">Jon Duckett</p>
+          <p>
+            Initiez-vous aux langages HTML et CSS pour structurer des pages
+            web et créer des interfaces visuellement attrayantes.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <article class="livre" data-recherche="eloquent javascript marijn haverbeke javascript programmation algorithmes web">
+          <div class="icone" aria-hidden="true">⚙️</div>
+          <h3>Eloquent JavaScript</h3>
+          <p class="auteur">Marijn Haverbeke</p>
+          <p>
+            Explorez les bases de JavaScript, les fonctions, les objets,
+            les structures de données et la programmation web.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <article class="livre" data-recherche="react native in action nader dabit applications mobiles android ios javascript developpement">
+          <div class="icone" aria-hidden="true">📱</div>
+          <h3>React Native in Action</h3>
+          <p class="auteur">Nader Dabit</p>
+          <p>
+            Découvrez les concepts de React Native pour concevoir des
+            applications mobiles avec des technologies JavaScript.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <!-- APPRENTISSAGE ET CULTURE GÉNÉRALE -->
+
+        <article class="livre" data-recherche="apprendre a apprendre methodes apprentissage memoire revision education etudes">
+          <div class="icone" aria-hidden="true">🧠</div>
+          <h3>Apprendre à apprendre</h3>
+          <p class="auteur">Ressource pédagogique</p>
+          <p>
+            Découvrez des méthodes pour organiser vos révisions, mieux retenir
+            les informations et développer votre autonomie dans les études.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <article class="livre" data-recherche="francais pour les nuls langue francaise grammaire orthographe vocabulaire expression">
+          <div class="icone" aria-hidden="true">📝</div>
+          <h3>Le français pour les Nuls</h3>
+          <p class="auteur">Collection Pour les Nuls</p>
+          <p>
+            Renforcez votre maîtrise du français grâce à des notions de
+            grammaire, d'orthographe, de vocabulaire et d'expression écrite.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <article class="livre" data-recherche="une breve histoire de presque tout bill bryson science univers terre histoire decouvertes">
+          <div class="icone" aria-hidden="true">🔬</div>
+          <h3>Une brève histoire de presque tout</h3>
+          <p class="auteur">Bill Bryson</p>
+          <p>
+            Partez à la découverte des grandes questions scientifiques,
+            de l'histoire de la Terre aux connaissances sur l'Univers.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <!-- HISTOIRE ET CIVILISATIONS -->
+
+        <article class="livre" data-recherche="histoire afrique noire joseph ki zerbo afrique histoire civilisations cultures">
+          <div class="icone" aria-hidden="true">🌍</div>
+          <h3>Histoire de l'Afrique noire</h3>
+          <p class="auteur">Joseph Ki-Zerbo</p>
+          <p>
+            Explorez l'histoire des sociétés africaines, leurs civilisations,
+            leurs transformations et les grands événements du continent.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <article class="livre" data-recherche="sapiens une breve histoire humanite yuval noah harari humanite histoire societes">
+          <div class="icone" aria-hidden="true">🏛️</div>
+          <h3>Sapiens : Une brève histoire de l'humanité</h3>
+          <p class="auteur">Yuval Noah Harari</p>
+          <p>
+            Découvrez une réflexion sur l'évolution de l'humanité et les
+            transformations qui ont façonné les sociétés humaines.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
+        <article class="livre" data-recherche="histoire du senegal senegal histoire afrique de l'ouest cultures royaumes">
+          <div class="icone" aria-hidden="true">🇸🇳</div>
+          <h3>Histoire du Sénégal</h3>
+          <p class="auteur">Ressource pédagogique</p>
+          <p>
+            Découvrez les royaumes historiques, les cultures, les personnages
+            marquants et les grandes étapes de l'histoire du Sénégal.
+          </p>
+          <a class="bouton" href="lecteur.html">Découvrir le livre →</a>
+        </article>
+
       </div>
 
       <p class="aucun-resultat" id="aucunResultat">
@@ -541,3 +636,4 @@
   </script>
 </body>
 </html>
+```
