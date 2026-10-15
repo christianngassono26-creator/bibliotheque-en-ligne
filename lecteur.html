@@ -4,107 +4,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#071426">
-  <title>Découvrir un livre | Bibliothèque en ligne</title>
+  <meta name="description" content="Découvrez des livres, leurs auteurs et des ressources de lecture en ligne.">
+  <title>Lecteur de livres | Bibliothèque en ligne</title>
 
   <style>
-    * { box-sizing: border-box; }
-
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f3f5f9;
-      color: #263238;
-      line-height: 1.7;
-      position: relative;
-      overflow-x: hidden;
-      background: linear-gradient(135deg, #071426, #102744, #201447, #071426);
-      background-size: 300% 300%;
-      animation: fondLumineux 14s ease infinite;
-      color: #f3f7ff;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    @keyframes fondLumineux {
-      0% { background-position: 0% 50%; }
+    :root {
+      --bleu: #101d45;
+      --violet: #7655e8;
+      --violet-clair: #a78bfa;
+      --texte: #f5f3ff;
+      --carte: rgba(255, 255, 255, 0.08);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texte);
+      background: linear-gradient(135deg, #080f27, #182b59, #38205d);
+      background-size: 200% 200%;
+      animation: fondAnime 12s ease infinite;
+      padding: 25px 16px 40px;
+    }
+
+    @keyframes fondAnime {
+      0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     header {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(120deg, #071426, #123e70, #54258a);
-      background-size: 200% 200%;
-      animation: lumiereEntete 8s ease infinite;
-      border-bottom: 1px solid rgba(120, 190, 255, 0.6);
-      box-shadow: 0 0 25px rgba(40, 140, 255, 0.35);
-      color: white;
-      padding: 25px 15px;
       text-align: center;
-    }
-
-    @keyframes lumiereEntete {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      max-width: 900px;
+      margin: 0 auto 30px;
+      animation: apparition 0.8s ease;
     }
 
     header h1 {
-      margin: 0;
-      font-size: 28px;
-      text-shadow: 0 0 8px #7dd3fc, 0 0 20px #398bff, 0 0 35px #7c3aed;
+      font-size: clamp(28px, 5vw, 42px);
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #ffffff, #c4b5fd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    header p { margin-bottom: 0; }
-
-    nav {
-      background: rgba(3, 13, 30, 0.92);
-      border-bottom: 1px solid rgba(96, 165, 250, 0.4);
-      padding: 12px;
-      text-align: center;
+    header p {
+      line-height: 1.7;
+      color: #d8d8f5;
     }
 
-    nav a {
+    .retour {
+      display: inline-block;
+      margin-bottom: 22px;
+      padding: 11px 17px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 25px;
       color: white;
       text-decoration: none;
-      margin: 0 12px;
-      font-weight: bold;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
+      background: rgba(255,255,255,0.08);
+      transition: 0.3s;
     }
 
-    nav a:hover {
-      color: #7dd3fc;
-      text-shadow: 0 0 12px #38bdf8;
+    .retour:hover {
+      background: var(--violet);
+      transform: translateY(-2px);
     }
 
-    main {
-      width: 92%;
-      max-width: 950px;
-      margin: 30px auto;
-    }
-
-    .selection, .carte {
-      position: relative;
-      overflow: hidden;
-      color: #eaf3ff;
-      background: rgba(12, 29, 55, 0.82);
-      border: 1px solid rgba(125, 211, 252, 0.28);
-      border-radius: 16px;
+    .conteneur {
+      max-width: 900px;
+      margin: auto;
       padding: 25px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3),
-                  0 0 18px rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 22px;
+      background: rgba(9, 15, 40, 0.68);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
       backdrop-filter: blur(12px);
-      margin-bottom: 25px;
-      transition: transform 0.35s ease, box-shadow 0.35s ease,
-                  border-color 0.35s ease;
+      animation: apparition 0.9s ease;
     }
 
-    .selection:hover, .carte:hover {
-      transform: translateY(-4px);
-      border-color: rgba(125, 211, 252, 0.75);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35),
-                  0 0 22px rgba(56, 189, 248, 0.25),
-                  0 0 45px rgba(139, 92, 246, 0.15);
+    @keyframes apparition {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     label {
@@ -115,343 +100,417 @@
 
     select {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #438bd1;
-      border-radius: 7px;
-      font-size: 16px;
-      color: #f3f7ff;
-      background: #102744;
-      margin-bottom: 15px;
-      transition: box-shadow 0.3s ease;
-    }
-
-    select:focus {
-      outline: none;
-      border-color: #67e8f9;
-      box-shadow: 0 0 15px rgba(34, 211, 238, 0.45);
-    }
-
-    button, .bouton {
-      display: inline-block;
+      padding: 15px;
+      border: 1px solid #8b7af0;
+      border-radius: 12px;
+      background: #17234b;
       color: white;
-      background: linear-gradient(110deg, #0878d1, #6d3ce8);
-      background-size: 200% 200%;
+      font-size: 16px;
+      outline: none;
+    }
+
+    select option {
+      background: #17234b;
+      color: white;
+    }
+
+    .boutons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    button, .lien-livre {
+      display: inline-block;
       border: none;
-      padding: 12px 20px;
-      border-radius: 7px;
+      border-radius: 12px;
+      padding: 13px 20px;
       font-size: 15px;
       font-weight: bold;
       text-decoration: none;
+      text-align: center;
       cursor: pointer;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease,
-                  background-position 0.4s ease;
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
     }
 
-    button:hover, .bouton:hover {
-      transform: translateY(-3px) scale(1.02);
-      background-position: 100% 50%;
-      box-shadow: 0 0 12px #38bdf8,
-                  0 0 25px rgba(59, 130, 246, 0.65),
-                  0 0 40px rgba(139, 92, 246, 0.3);
+    button:hover, .lien-livre:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(118,85,232,0.3);
     }
 
-    .carte h2, .selection h2 {
-      color: #93c5fd;
-      text-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+    .principal, .lien-livre {
+      background: linear-gradient(90deg, #7052e8, #9b63e9);
+      color: white;
     }
 
-    .carte h2 {
-      border-bottom: 2px solid rgba(125, 211, 252, 0.25);
-      padding-bottom: 8px;
+    .secondaire {
+      color: white;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
-    .carte h3 {
-      color: #67e8f9;
-      margin-top: 25px;
+    #message {
+      margin-top: 14px;
+      color: #ddd6fe;
+      line-height: 1.6;
     }
 
-    .infos {
-      background: rgba(30, 64, 110, 0.45);
-      border: 1px solid rgba(125, 211, 252, 0.2);
-      padding: 15px;
-      border-radius: 10px;
-      margin: 18px 0;
+    #fiche {
+      display: none;
+      margin-top: 28px;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(167,139,250,0.35);
+      background: var(--carte);
+      animation: apparition 0.5s ease;
     }
 
-    .infos p { margin: 5px 0; }
-
-    #resume, #biographie, #personnages, #lecons {
-      white-space: pre-line;
+    #fiche h2 {
+      color: #c4b5fd;
+      margin-bottom: 8px;
+      font-size: 27px;
     }
 
-    .retour {
-      display: inline-block;
-      margin-bottom: 20px;
-      color: #7dd3fc;
-      font-weight: bold;
-      text-decoration: none;
+    #fiche h3 {
+      color: #ddd6fe;
+      margin: 22px 0 9px;
     }
 
-    .retour:hover { text-shadow: 0 0 12px #38bdf8; }
+    #fiche p {
+      line-height: 1.8;
+      color: #eeeeff;
+      overflow-wrap: anywhere;
+    }
 
-    #sourceLink { margin-top: 25px; }
+    .metadonnees {
+      color: #c4b5fd !important;
+      margin-bottom: 18px;
+    }
+
+    .note {
+      margin-top: 20px;
+      padding: 13px;
+      border-left: 3px solid var(--violet-clair);
+      background: rgba(118,85,232,0.12);
+      border-radius: 6px;
+      line-height: 1.7;
+      color: #e9e5ff;
+    }
 
     footer {
-      background: rgba(3, 13, 30, 0.95);
-      border-top: 1px solid rgba(125, 211, 252, 0.3);
-      box-shadow: 0 -5px 25px rgba(59, 130, 246, 0.12);
-      color: white;
       text-align: center;
-      padding: 18px;
-      margin-top: 40px;
-    }
-
-    .carte h2, .carte h3, .carte p, .carte .infos {
-      animation: apparition 0.7s ease both;
-    }
-
-    @keyframes apparition {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+      color: #c7c8e6;
+      margin: 28px auto 0;
+      font-size: 13px;
     }
 
     @media (max-width: 600px) {
-      header h1 { font-size: 23px; }
-      nav a { display: inline-block; margin: 5px 8px; }
-      .selection, .carte { padding: 18px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
+      .conteneur { padding: 18px; }
+      .boutons { flex-direction: column; }
+      .boutons button, .boutons a { width: 100%; }
+      #fiche { padding: 18px; }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Bibliothèque en ligne</h1>
-    <p>Découvrez des œuvres littéraires et leurs auteurs</p>
+    <a class="retour" href="index.html">← Retour à la bibliothèque</a>
+    <h1>📚 Lecteur de livres</h1>
+    <p>Choisis un ouvrage, découvre son auteur et accède à une ressource en ligne.</p>
   </header>
 
-  <nav>
-    <a href="index.html">Accueil</a>
-    <a href="lecteur.html">Découvrir un livre</a>
-  </nav>
+  <main class="conteneur">
+    <label for="livre">Sélectionne un livre :</label>
 
-  <main>
-    <a class="retour" href="index.html">← Retour à l'accueil</a>
+    <select id="livre">
+      <option value="">-- Choisir un livre --</option>
+      <option value="miserables">Les Misérables — Victor Hugo</option>
+      <option value="petitprince">Le Petit Prince — Antoine de Saint-Exupéry</option>
+      <option value="alchimiste">L'Alchimiste — Paulo Coelho</option>
+      <option value="pereriche">Père riche, père pauvre — Robert Kiyosaki</option>
+      <option value="habitudes">Les 7 habitudes de ceux qui réalisent tout ce qu'ils entreprennent — Stephen Covey</option>
+      <option value="atomic">Un rien peut tout changer — James Clear</option>
+      <option value="htmlcss">HTML et CSS — Jon Duckett</option>
+      <option value="eloquent">Eloquent JavaScript — Marijn Haverbeke</option>
+      <option value="react">React Native — Documentation officielle</option>
+      <option value="apprendre">Apprendre à apprendre — ressources éducatives</option>
+      <option value="francais">Français — ressources Larousse</option>
+      <option value="brevehistoire">Une brève histoire de presque tout — Bill Bryson</option>
+      <option value="afrique">Histoire de l'Afrique noire — Joseph Ki-Zerbo</option>
+      <option value="sapiens">Sapiens — Yuval Noah Harari</option>
+      <option value="senegal">Histoire du Sénégal — ressources historiques</option>
+    </select>
 
-    <section class="selection">
-      <h2>Choisir un livre</h2>
-      <p>Sélectionnez une œuvre pour découvrir sa présentation.</p>
+    <div class="boutons">
+      <button type="button" class="principal" id="decouvrir">
+        Découvrir le livre
+      </button>
+      <button type="button" class="secondaire" id="ouvrir" disabled>
+        Ouvrir la ressource en ligne
+      </button>
+    </div>
 
-      <label for="bookSelect">Titre du livre :</label>
+    <p id="message" role="status" aria-live="polite">
+      Sélectionne un livre pour afficher sa fiche.
+    </p>
 
-      <select id="bookSelect">
-        <option value="miserables">Les Misérables — Victor Hugo</option>
-        <option value="petit-prince">Le Petit Prince — Antoine de Saint-Exupéry</option>
-        <option value="alchimiste">L'Alchimiste — Paulo Coelho</option>
-        <option value="pere-riche">Père riche, père pauvre — Robert T. Kiyosaki</option>
-        <option value="sept-habitudes">Les 7 habitudes — Stephen R. Covey</option>
-        <option value="rien-changer">Un rien peut tout changer — James Clear</option>
-        <option value="html-css">HTML et CSS — Jon Duckett</option>
-        <option value="eloquent-js">Eloquent JavaScript — Marijn Haverbeke</option>
-        <option value="react-native">React Native in Action — Nader Dabit</option>
-        <option value="apprendre">Apprendre à apprendre — Ressource pédagogique</option>
-        <option value="francais">Le français pour les Nuls — Collection</option>
-        <option value="bryson">Une brève histoire de presque tout — Bill Bryson</option>
-        <option value="afrique">Histoire de l'Afrique noire — Joseph Ki-Zerbo</option>
-        <option value="sapiens">Sapiens — Yuval Noah Harari</option>
-        <option value="senegal">Histoire du Sénégal — Ressource pédagogique</option>
-      </select>
-
-      <button id="discoverButton" type="button">Découvrir le livre</button>
-    </section>
-
-    <article class="carte" id="bookCard" aria-live="polite">
+    <section id="fiche" aria-live="polite">
       <h2 id="titre"></h2>
+      <p class="metadonnees" id="infos"></p>
 
-      <div class="infos">
-        <p><strong>Auteur :</strong> <span id="auteur"></span></p>
-        <p><strong>Année de publication :</strong> <span id="annee"></span></p>
-        <p><strong>Genre :</strong> <span id="genre"></span></p>
-      </div>
-
-      <h3>Biographie de l'auteur / présentation</h3>
+      <h3>À propos de l'auteur ou de la ressource</h3>
       <p id="biographie"></p>
 
-      <h3>Résumé détaillé</h3>
+      <h3>Présentation du livre</h3>
       <p id="resume"></p>
 
-      <h3>Personnages principaux / notions clés</h3>
-      <p id="personnages"></p>
+      <div class="note" id="note"></div>
 
-      <h3>Leçons à retenir</h3>
-      <p id="lecons"></p>
-
-      <div id="sourceLink"></div>
-    </article>
+      <div class="boutons">
+        <a class="lien-livre" id="lien" href="#" target="_blank"
+           rel="noopener noreferrer">
+          Accéder à la ressource
+        </a>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>© 2026 — Bibliothèque en ligne | Projet éducatif</p>
+    Bibliothèque en ligne · Découverte, apprentissage et culture
   </footer>
 
   <script>
-    const books = {
-      "miserables": {
+    const livres = {
+      miserables: {
         titre: "Les Misérables",
         auteur: "Victor Hugo",
         annee: "1862",
-        genre: "Roman historique et social",
-        biographie: "Victor Hugo (1802-1885) est un écrivain, poète et dramaturge français. Figure majeure du romantisme, il a écrit notamment Notre-Dame de Paris et Les Misérables. Ses œuvres abordent la justice, la pauvreté, la liberté et la dignité humaine.",
-        resume: "Jean Valjean, ancien forçat, tente de reconstruire sa vie après avoir été emprisonné pour le vol d'un pain. La bonté d'un évêque l'encourage à changer.\n\nIl prend soin de Cosette, la fille de Fantine, tout en essayant d'échapper à l'inspecteur Javert. Le roman décrit une société marquée par les inégalités et les bouleversements politiques.\n\nÀ travers les épreuves des personnages, Victor Hugo met en lumière la misère, la solidarité, la compassion et la quête de justice.",
-        personnages: "• Jean Valjean : ancien forçat en quête de rédemption.\n• Cosette : jeune fille protégée par Jean Valjean.\n• Fantine : mère de Cosette, confrontée à la pauvreté.\n• Javert : inspecteur attaché à la loi.\n• Marius : jeune homme engagé dans les événements politiques.",
-        lecons: "• La bonté peut aider une personne à changer.\n• La pauvreté et l'exclusion provoquent de grandes souffrances.\n• La justice doit tenir compte de la dignité humaine.\n• La solidarité peut transformer des vies.",
-        url: "https://fr.wikisource.org/wiki/Les_Misérables"
+        genre: "Roman social et historique",
+        biographie: "Victor Hugo (1802-1885) est un écrivain français majeur, connu pour ses romans, sa poésie et son engagement social.",
+        resume: "À travers le parcours de Jean Valjean, ce roman aborde la pauvreté, la justice, la rédemption et les inégalités sociales.",
+        url: "https://fr.wikisource.org/wiki/Les_Misérables",
+        note: "Wikisource propose le texte de cette œuvre classique dans une bibliothèque numérique."
       },
 
-      "petit-prince": {
+      petitprince: {
         titre: "Le Petit Prince",
         auteur: "Antoine de Saint-Exupéry",
         annee: "1943",
         genre: "Conte philosophique",
-        biographie: "Antoine de Saint-Exupéry (1900-1944) est un écrivain et aviateur français. Son expérience de pilote a influencé ses œuvres. Le Petit Prince est célèbre pour ses réflexions sur l'amitié, l'amour et le sens de la vie.",
-        resume: "Un aviateur en panne dans le désert rencontre un petit garçon venu d'une autre planète : le Petit Prince.\n\nLe garçon raconte ses voyages et les personnages qu'il a rencontrés. Sur Terre, un renard lui apprend que les liens affectifs se construisent avec du temps et de la responsabilité.\n\nLe récit invite à regarder au-delà des apparences et à redécouvrir l'amitié, l'émerveillement et l'essentiel.",
-        personnages: "• Le Petit Prince : enfant curieux en quête de compréhension.\n• L'aviateur : narrateur de l'histoire.\n• La rose : fleur à laquelle le Petit Prince est attaché.\n• Le renard : il lui enseigne la valeur des liens.\n• Le serpent : personnage mystérieux du récit.",
-        lecons: "• L'amitié se construit avec du temps et de l'attention.\n• Il faut prendre soin de ceux que l'on aime.\n• Les apparences ne révèlent pas toujours l'essentiel.\n• L'imagination aide à comprendre le monde.",
-        url: "https://fr.wikipedia.org/wiki/Le_Petit_Prince"
+        biographie: "Antoine de Saint-Exupéry (1900-1944) était un écrivain et aviateur français.",
+        resume: "Un aviateur rencontre un petit prince venu d'une autre planète. Le récit invite à réfléchir à l'amitié, à l'amour et au regard que nous portons sur le monde.",
+        url: "https://fr.wikipedia.org/wiki/Le_Petit_Prince",
+        note: "Le lien mène à une présentation de l'œuvre, et non au texte intégral."
       },
 
-      "alchimiste": {
+      alchimiste: {
         titre: "L'Alchimiste",
         auteur: "Paulo Coelho",
         annee: "1988",
         genre: "Roman philosophique",
-        biographie: "Paulo Coelho, né en 1947 au Brésil, est un écrivain connu pour ses romans sur la quête de soi, les rêves et la spiritualité. L'Alchimiste est l'une de ses œuvres les plus célèbres.",
-        resume: "Santiago, un jeune berger espagnol, fait un rêve récurrent au sujet d'un trésor près des pyramides d'Égypte. Il décide de partir à sa recherche.\n\nPendant son voyage, il rencontre des personnes qui lui enseignent la patience, le courage et la confiance en soi. Malgré les obstacles, il apprend à écouter son intuition et à mieux comprendre ses aspirations.\n\nLe roman invite à réfléchir aux rêves personnels et à la transformation que peut apporter un voyage.",
-        personnages: "• Santiago : jeune berger en quête d'un trésor.\n• Le roi de Salem : il encourage Santiago à poursuivre son rêve.\n• Le marchand de cristaux : il lui apprend la patience.\n• L'alchimiste : guide dans sa quête.\n• Fatima : jeune femme rencontrée durant son voyage.",
-        lecons: "• Oser poursuivre ses rêves.\n• Transformer les difficultés en occasions d'apprendre.\n• Faire preuve de patience et de persévérance.\n• Apprendre tout au long du chemin.",
-        url: "https://fr.wikipedia.org/wiki/L%27Alchimiste_(Coelho)"
+        biographie: "Paulo Coelho est un écrivain brésilien connu pour ses romans qui explorent les rêves, les choix et la quête de sens.",
+        resume: "Le berger Santiago entreprend un voyage à la recherche d'un trésor. Son parcours l'amène à découvrir l'importance de l'expérience et de la persévérance.",
+        url: "https://fr.wikipedia.org/wiki/L%27Alchimiste_(Coelho)",
+        note: "Le lien permet de découvrir le livre et son histoire. Le texte intégral n'est pas fourni ici."
       },
 
-      "pere-riche": {
+      pereriche: {
         titre: "Père riche, père pauvre",
         auteur: "Robert T. Kiyosaki",
         annee: "1997",
-        genre: "Éducation financière et développement personnel",
-        biographie: "Robert T. Kiyosaki est un auteur et entrepreneur américain connu pour ses ouvrages consacrés à l'éducation financière et à la gestion de l'argent.",
-        resume: "Dans cet ouvrage, l'auteur compare deux façons de considérer l'argent, le travail et l'éducation financière. Il encourage le lecteur à comprendre la différence entre les actifs et les passifs, à apprendre à gérer son budget et à développer ses connaissances financières.\n\nLe livre défend l'idée que l'éducation financière peut aider à prendre des décisions plus réfléchies. Ses conseils doivent toutefois être évalués selon sa situation personnelle : ils ne garantissent pas la réussite financière.",
-        personnages: "• Le narrateur et l'auteur : présentent les expériences utilisées pour expliquer leurs idées.\n• Le père instruit : représente une approche traditionnelle de l'emploi et de la sécurité.\n• Le père riche : représente une approche orientée vers l'éducation financière et les actifs.",
-        lecons: "• Apprendre à gérer son budget.\n• Comprendre les actifs et les passifs.\n• Développer ses connaissances financières.\n• Examiner les risques avant de prendre une décision d'investissement.",
-        url: "https://www.richdad.com/"
+        genre: "Éducation financière",
+        biographie: "Robert Kiyosaki est un auteur connu pour ses ouvrages de vulgarisation sur l'argent, les actifs et l'éducation financière.",
+        resume: "L'ouvrage compare différentes façons de penser l'argent, l'épargne, les actifs et l'indépendance financière.",
+        url: "https://www.richdad.com/",
+        note: "Site officiel de l'auteur et de ses ressources. Le livre peut être protégé par le droit d'auteur."
       },
 
-      "sept-habitudes": {
+      habitudes: {
         titre: "Les 7 habitudes de ceux qui réalisent tout ce qu'ils entreprennent",
         auteur: "Stephen R. Covey",
         annee: "1989",
-        genre: "Développement personnel et leadership",
-        biographie: "Stephen R. Covey (1932-2012) était un auteur et formateur américain spécialisé dans le leadership, l'efficacité personnelle et les relations humaines.",
-        resume: "Cet ouvrage présente des habitudes destinées à améliorer l'efficacité personnelle et collective. Il invite notamment à prendre ses responsabilités, définir ses objectifs, établir des priorités, rechercher des solutions bénéfiques pour toutes les parties et écouter les autres avant de répondre.\n\nL'auteur insiste sur l'importance de développer des principes durables plutôt que de rechercher uniquement des résultats immédiats.",
-        personnages: "Il ne s'agit pas d'un roman. Les notions clés comprennent la responsabilité personnelle, les objectifs, les priorités, la coopération, l'écoute, la collaboration et l'amélioration continue.",
-        lecons: "• Prendre la responsabilité de ses choix.\n• Définir ses objectifs.\n• Organiser ses priorités.\n• Écouter avant de juger.\n• Favoriser la coopération et l'apprentissage continu.",
-        url: "https://www.franklincovey.com/"
+        genre: "Développement personnel",
+        biographie: "Stephen Covey (1932-2012) était un auteur et formateur américain spécialisé dans le leadership et l'efficacité personnelle.",
+        resume: "Le livre présente des habitudes visant à améliorer l'organisation personnelle, la responsabilité, les relations et la coopération.",
+        url: "https://www.franklincovey.com/",
+        note: "Le lien mène aux ressources de FranklinCovey, organisme associé aux méthodes de l'auteur."
       },
 
-      "rien-changer": {
+      atomic: {
         titre: "Un rien peut tout changer",
         auteur: "James Clear",
-        annee: "2018 (édition originale anglaise)",
+        annee: "2018",
         genre: "Habitudes et développement personnel",
-        biographie: "James Clear est un auteur américain connu pour ses travaux de vulgarisation sur les habitudes, la prise de décision et l'amélioration progressive.",
-        resume: "L'ouvrage explique comment de petits changements répétés peuvent produire des résultats importants à long terme. Il propose de rendre les bonnes habitudes plus visibles, plus attirantes, plus faciles et plus satisfaisantes.\n\nIl souligne aussi l'intérêt d'adapter son environnement et de construire des routines réalistes, plutôt que de compter uniquement sur la motivation.",
-        personnages: "Il ne s'agit pas d'un roman. Les notions clés sont les habitudes, les déclencheurs, les routines, l'environnement, la régularité et les progrès graduels.",
-        lecons: "• Commencer par de petites actions réalisables.\n• Répéter régulièrement les comportements utiles.\n• Rendre les bonnes habitudes plus faciles à suivre.\n• Observer ses progrès et ajuster sa méthode.",
-        url: "https://jamesclear.com/atomic-habits"
+        biographie: "James Clear est un auteur qui étudie la formation des habitudes et les progrès réguliers.",
+        resume: "L'ouvrage explique comment de petites actions répétées peuvent contribuer à des changements durables et comment rendre les bonnes habitudes plus faciles à adopter.",
+        url: "https://jamesclear.com/atomic-habits",
+        note: "La page de l'auteur contient des informations et des ressources complémentaires en anglais."
       },
 
-      "html-css": {
-        titre: "HTML et CSS : conception et réalisation de sites web",
+      htmlcss: {
+        titre: "HTML et CSS",
         auteur: "Jon Duckett",
-        annee: "2011 pour l'édition HTML & CSS: Design and Build Websites",
-        genre: "Informatique et développement web",
-        biographie: "Jon Duckett est un auteur spécialisé dans les ouvrages pédagogiques consacrés au développement web et à la présentation des sites internet.",
-        resume: "Les ouvrages de Jon Duckett consacrés à HTML et CSS expliquent comment structurer une page web avec HTML et comment en définir l'apparence avec CSS.\n\nLes sujets abordés comprennent les titres, les paragraphes, les liens, les images, les listes, les couleurs, les espacements et la mise en page. Ces bases permettent de créer des pages lisibles et adaptées aux différents écrans.",
-        personnages: "Notions clés : HTML, CSS, balises, attributs, sélecteurs, propriétés, mise en page et conception responsive.",
-        lecons: "• HTML organise le contenu d'une page.\n• CSS définit sa présentation visuelle.\n• Une structure claire facilite la maintenance.\n• Il faut tester un site sur plusieurs tailles d'écran.",
-        url: "https://www.htmlandcssbook.com/"
+        annee: "2011",
+        genre: "Développement web",
+        biographie: "Jon Duckett est un auteur de livres pédagogiques consacrés aux technologies web et à la programmation.",
+        resume: "Les notions de HTML et de CSS permettent de structurer une page web et de définir son apparence : textes, couleurs, espacements et mise en page.",
+        url: "https://www.htmlandcssbook.com/",
+        note: "Ressource consacrée au livre et à l'apprentissage du HTML et du CSS."
       },
 
-      "eloquent-js": {
+      eloquent: {
         titre: "Eloquent JavaScript",
         auteur: "Marijn Haverbeke",
-        annee: "2018 pour la troisième édition",
-        genre: "Programmation et développement web",
-        biographie: "Marijn Haverbeke est un programmeur et auteur connu pour son livre pédagogique sur JavaScript, accessible également en ligne.",
-        resume: "Eloquent JavaScript présente les bases de la programmation, les valeurs, les types, les fonctions, les objets, les tableaux et les structures de contrôle.\n\nL'ouvrage aborde ensuite des sujets plus avancés, comme la manipulation des données, les erreurs, les interfaces web et les interactions avec les serveurs. Des exemples et exercices permettent de pratiquer progressivement.",
-        personnages: "Notions clés : variables, conditions, boucles, fonctions, objets, tableaux, programmation fonctionnelle et programmation web.",
-        lecons: "• Pratiquer le code régulièrement.\n• Décomposer un problème en petites étapes.\n• Lire les erreurs pour comprendre les problèmes.\n• Tester ses programmes et améliorer son code.",
-        url: "https://eloquentjavascript.net/"
+        annee: "Première édition en 2011",
+        genre: "Programmation",
+        biographie: "Marijn Haverbeke est un programmeur et auteur spécialisé dans JavaScript.",
+        resume: "Ce livre enseigne les bases de JavaScript, les structures de données, les fonctions, le navigateur et la programmation côté serveur.",
+        url: "https://eloquentjavascript.net/",
+        note: "Une version en ligne est disponible gratuitement sur le site officiel du livre, en anglais."
       },
 
-      "react-native": {
-        titre: "React Native in Action",
-        auteur: "Nader Dabit",
-        annee: "2019",
+      react: {
+        titre: "React Native",
+        auteur: "Documentation officielle React Native",
+        annee: "Documentation évolutive",
         genre: "Développement d'applications mobiles",
-        biographie: "Nader Dabit est un développeur et auteur qui a travaillé sur des technologies de développement d'applications mobiles et web.",
-        resume: "Cet ouvrage présente les principes de React Native pour créer des applications mobiles à partir de JavaScript et de React.\n\nLes sujets comprennent la création d'interfaces, l'organisation des composants, la gestion de l'état et l'intégration de fonctionnalités mobiles. Les outils et versions ayant évolué, il est conseillé de compléter les notions du livre par la documentation actuelle.",
-        personnages: "Notions clés : composants, JSX, propriétés, état, navigation, interfaces mobiles et intégration des fonctionnalités du téléphone.",
-        lecons: "• Organiser une application en composants réutilisables.\n• Tester sur les plateformes visées.\n• Consulter la documentation à jour.\n• Construire et tester une fonctionnalité à la fois.",
-        url: "https://reactnative.dev/docs/getting-started"
+        biographie: "React Native est un projet logiciel qui permet de développer des applications mobiles avec JavaScript et React.",
+        resume: "La documentation explique comment démarrer un projet, créer des composants, gérer l'affichage et développer une application mobile.",
+        url: "https://reactnative.dev/docs/getting-started",
+        note: "Documentation technique officielle, principalement en anglais."
       },
 
-      "apprendre": {
+      apprendre: {
         titre: "Apprendre à apprendre",
-        auteur: "Ressource pédagogique",
-        annee: "Non applicable",
-        genre: "Méthodes d'apprentissage et éducation",
-        biographie: "Cette fiche est une ressource pédagogique générale et non la présentation d'une édition précise d'un livre portant ce titre.",
-        resume: "Apprendre efficacement consiste à organiser son travail, se fixer des objectifs précis et réviser régulièrement.\n\nOn peut améliorer sa compréhension en reformulant les notions avec ses propres mots, en répondant à des questions sans consulter ses notes, en réalisant des exercices et en expliquant une idée à quelqu'un d'autre.\n\nLe sommeil, les pauses et un environnement de travail adapté contribuent également à l'apprentissage.",
-        personnages: "Notions clés : objectifs, concentration, répétition espacée, rappel actif, prise de notes, exercices pratiques et autoévaluation.",
-        lecons: "• Préparer un programme de révision réaliste.\n• Réviser plusieurs fois plutôt que tout à la dernière minute.\n• Tester sa compréhension sans regarder la réponse.\n• Corriger ses erreurs et demander de l'aide si nécessaire.",
-        url: "https://www.open.edu/openlearn/"
+        auteur: "Ressources éducatives",
+        annee: "Ressources en ligne",
+        genre: "Méthodes d'apprentissage",
+        biographie: "Cette fiche renvoie à des ressources pédagogiques destinées aux personnes qui souhaitent apprendre de manière autonome.",
+        resume: "La méthode d'apprentissage peut inclure la révision espacée, les exercices pratiques, l'autoévaluation et la reformulation des notions étudiées.",
+        url: "https://www.open.edu/openlearn/",
+        note: "OpenLearn propose des cours et des ressources éducatives gratuits."
       },
 
-      "francais": {
-        titre: "Le français pour les Nuls",
-        auteur: "Collection Pour les Nuls",
-        annee: "Variable selon l'édition",
-        genre: "Langue française et apprentissage",
-        biographie: "La collection Pour les Nuls rassemble des ouvrages pédagogiques. Cette fiche présente des thèmes d'apprentissage du français sans attribuer le contenu à une édition ou à un auteur non vérifié.",
-        resume: "L'apprentissage du français repose notamment sur la grammaire, l'orthographe, la conjugaison, le vocabulaire et la compréhension des textes.\n\nPour progresser, il est utile de lire régulièrement, d'écrire de courts textes, de vérifier les accords, de consulter un dictionnaire et de corriger les erreurs récurrentes.",
-        personnages: "Notions clés : nature et fonction des mots, accords, conjugaison, ponctuation, vocabulaire, compréhension et expression écrite.",
-        lecons: "• Lire chaque jour quelques pages.\n• Relire ses textes pour corriger les fautes.\n• Apprendre les règles avec des exemples.\n• Pratiquer l'expression orale et écrite.",
-        url: "https://www.larousse.fr/dictionnaires/francais"
+      francais: {
+        titre: "Français — ressources Larousse",
+        auteur: "Éditions et dictionnaires Larousse",
+        annee: "Ressources actualisées",
+        genre: "Langue française",
+        biographie: "Larousse est une maison d'édition connue notamment pour ses dictionnaires et ses ouvrages de référence.",
+        resume: "Les dictionnaires et ressources linguistiques peuvent aider à comprendre le vocabulaire, l'orthographe, la conjugaison et le sens des mots.",
+        url: "https://www.larousse.fr/dictionnaires/francais",
+        note: "Cette ressource donne accès au dictionnaire en ligne, pas à un livre intitulé « Français pour les Nuls »."
       },
 
-      "bryson": {
+      brevehistoire: {
         titre: "Une brève histoire de presque tout",
         auteur: "Bill Bryson",
-        annee: "2003 pour l'édition originale anglaise",
+        annee: "2003",
         genre: "Vulgarisation scientifique",
-        biographie: "Bill Bryson est un auteur connu pour ses livres de vulgarisation et ses récits qui rendent accessibles des sujets scientifiques et culturels.",
-        resume: "Cet ouvrage explore de grandes questions scientifiques : la formation de l'Univers, l'histoire de la Terre, l'évolution de la vie et les découvertes qui ont permis aux humains de mieux comprendre leur environnement.\n\nLe livre présente des chercheurs, des expériences et des débats scientifiques en expliquant des notions complexes de manière accessible.",
-        personnages: "Notions clés : Univers, géologie, évolution, biodiversité, méthode scientifique et histoire des découvertes.",
-        lecons: "• La connaissance scientifique évolue avec les découvertes.\n• Il est utile de poser des questions et de vérifier les informations.\n• La Terre et le vivant ont une histoire très longue.\n• La coopération scientifique contribue aux progrès des connaissances.",
-        url: "https://www.penguinrandomhouse.com/"
+        biographie: "Bill Bryson est un auteur connu pour ses ouvrages de vulgarisation scientifique, ses récits de voyage et ses livres documentaires.",
+        resume: "L'ouvrage propose un voyage à travers les grandes questions scientifiques, de la formation de l'Univers à l'histoire de la Terre et de la vie.",
+        url: "https://www.penguinrandomhouse.com/",
+        note: "Le lien mène au site de l'éditeur. Il ne garantit pas l'accès au texte intégral."
       },
 
-      "afrique": {
+      afrique: {
         titre: "Histoire de l'Afrique noire",
         auteur: "Joseph Ki-Zerbo",
-        annee: "1972 pour une édition historique de référence",
+        annee: "1972",
         genre: "Histoire de l'Afrique",
-        biographie: "Joseph Ki-Zerbo (1922-2006) était un historien, enseignant et intellectuel burkinabè. Ses travaux ont contrib
+        biographie: "Joseph Ki-Zerbo (1922-2006) était un historien, enseignant et intellectuel burkinabè. Ses travaux ont contribué à l'étude de l'histoire africaine à partir des sociétés et des sources du continent.",
+        resume: "Cet ouvrage de référence retrace de grandes étapes de l'histoire de l'Afrique noire et met en lumière la diversité des sociétés, des cultures et des évolutions historiques du continent.",
+        url: "https://search.worldcat.org/search?q=Histoire+de+l%27Afrique+noire+Joseph+Ki-Zerbo",
+        note: "Le lien permet de rechercher l'ouvrage dans des catalogues de bibliothèques. La disponibilité dépend des établissements."
+      },
+
+      sapiens: {
+        titre: "Sapiens : Une brève histoire de l'humanité",
+        auteur: "Yuval Noah Harari",
+        annee: "2011",
+        genre: "Histoire et évolution humaine",
+        biographie: "Yuval Noah Harari est un historien et auteur israélien connu pour ses ouvrages de synthèse sur l'histoire de l'humanité.",
+        resume: "L'ouvrage propose une interprétation de l'évolution humaine, des premières sociétés aux grandes transformations agricoles, politiques et économiques.",
+        url: "https://www.ynharari.com/",
+        note: "Le site de l'auteur présente ses livres et ses travaux. Le texte intégral peut être soumis au droit d'auteur."
+      },
+
+      senegal: {
+        titre: "Histoire du Sénégal",
+        auteur: "Ressources historiques et documentaires",
+        annee: "Ressources en ligne",
+        genre: "Histoire du Sénégal",
+        biographie: "Cette fiche rassemble une porte d'entrée vers des ressources documentaires sur l'histoire du Sénégal.",
+        resume: "Pour étudier l'histoire du Sénégal, on peut explorer les royaumes précoloniaux, les échanges commerciaux, la période coloniale, les mouvements d'indépendance et le Sénégal contemporain.",
+        url: "https://www.britannica.com/place/Senegal",
+        note: "Cette ressource de référence est en anglais et présente des informations générales sur le Sénégal."
+      }
+    };
+
+    const selectLivre = document.getElementById("livre");
+    const boutonDecouvrir = document.getElementById("decouvrir");
+    const boutonOuvrir = document.getElementById("ouvrir");
+    const message = document.getElementById("message");
+    const fiche = document.getElementById("fiche");
+    const lien = document.getElementById("lien");
+
+    let livreSelectionne = null;
+
+    function afficherLivre() {
+      const identifiant = selectLivre.value;
+
+      if (!identifiant || !livres[identifiant]) {
+        livreSelectionne = null;
+        fiche.style.display = "none";
+        boutonOuvrir.disabled = true;
+        message.textContent = "Choisis d'abord un livre dans la liste.";
+        return;
+      }
+
+      const livre = livres[identifiant];
+      livreSelectionne = livre;
+
+      document.getElementById("titre").textContent = livre.titre;
+      document.getElementById("infos").textContent =
+        "Auteur : " + livre.auteur +
+        " · Année : " + livre.annee +
+        " · Genre : " + livre.genre;
+
+      document.getElementById("biographie").textContent = livre.biographie;
+      document.getElementById("resume").textContent = livre.resume;
+      document.getElementById("note").textContent = livre.note;
+
+      lien.href = livre.url;
+      fiche.style.display = "block";
+      boutonOuvrir.disabled = false;
+      message.textContent = "La fiche du livre est affichée. Tu peux consulter la ressource en ligne.";
+
+      fiche.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    boutonDecouvrir.addEventListener("click", afficherLivre);
+
+    selectLivre.addEventListener("change", function () {
+      if (selectLivre.value) {
+        message.textContent = "Livre sélectionné. Clique sur « Découvrir le livre » pour afficher sa fiche.";
+      } else {
+        livreSelectionne = null;
+        fiche.style.display = "none";
+        boutonOuvrir.disabled = true;
+        message.textContent = "Sélectionne un livre pour afficher sa fiche.";
+      }
+    });
+
+    boutonOuvrir.addEventListener("click", function () {
+      if (!livreSelectionne || !livreSelectionne.url) {
+        message.textContent = "Sélectionne un livre et clique d'abord sur « Découvrir le livre ».";
+        return;
+      }
+
+      window.open(livreSelectionne.url, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
